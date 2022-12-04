@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using HighSchool.Entities;
+using HighSchool.Entities.Models;
 
 namespace HighSchool.Repository
 {
@@ -26,7 +27,7 @@ namespace HighSchool.Repository
             modelBuilder.ApplyConfiguration(new PageConfiguration());*/
 
         }
-       // public DbSet<Page>? Pages { get; set; }
+       public DbSet<Page>? Pages { get; set; }
        
     }
 }
