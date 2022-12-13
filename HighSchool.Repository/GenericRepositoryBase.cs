@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HighSchool.Repository
 {
-    public class GenericRepositoBase<T> : IGenericRepositoryBase<T> where T : class
+    public class GenericRepositoryBase<T> : IGenericRepositoryBase<T> where T : class
     {
         protected RepositoryContext RepositoryContext { get; }
-        public GenericRepositoBase(RepositoryContext repositoryContext)
+        public GenericRepositoryBase(RepositoryContext repositoryContext)
         {
             RepositoryContext = repositoryContext;
         }

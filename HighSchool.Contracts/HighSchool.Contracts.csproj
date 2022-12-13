@@ -8,5 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HighSchool.Shared\HighSchool.Shared.csproj" />
+    <ProjectReference Include="..\HighSchool.Entities\HighSchool.Entities.csproj" />
   </ItemGroup>
 </Project>

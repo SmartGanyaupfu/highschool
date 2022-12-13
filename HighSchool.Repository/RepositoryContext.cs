@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using HighSchool.Entities;
 using HighSchool.Entities.Models;
+using HighSchool.Repository.SeedDataConfig;
+using Image = HighSchool.Entities.Models.Image;
 
 namespace HighSchool.Repository
 {
@@ -21,14 +23,17 @@ namespace HighSchool.Repository
         {
             base.OnModelCreating(modelBuilder);
 
-           
-/*
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
-            modelBuilder.ApplyConfiguration(new PageConfiguration());*/
+
+            // modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new PageConfiguration());
+            modelBuilder.ApplyConfiguration(new PostConfiguration());
+            modelBuilder.ApplyConfiguration(new ImageConfiguration());
 
         }
-       public DbSet<Page>? Pages { get; set; }
-       
+       public DbSet<Page> Pages { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Image> Images { get; set; }
+
     }
 }
 

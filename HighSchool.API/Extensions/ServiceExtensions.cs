@@ -9,8 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HighSchool.API.Extensions
 {
-    public  static class ServiceExtensions
+    public static class ServiceExtensions
     {
+
         public static void ConfigureCors(this IServiceCollection services) =>
               services.AddCors(options =>
               {
@@ -23,14 +24,19 @@ namespace HighSchool.API.Extensions
         public static void ConfigureLoggerService(this IServiceCollection services) => services.AddSingleton<ILoggerManager, LoggerManager>();
 
         // public static void ConfigureServiceManager(this IServiceCollection services) => services.AddScoped<IServiceManager, ServiceManager>();
-        public static void ConfigureSqliteContext(this IServiceCollection services,
-        IConfiguration cofiguration) =>
-         services.AddDbContext<RepositoryContext>(opts =>
+        public static void ConfigureSqlContext(this IServiceCollection services,
+        IConfiguration cofiguration)
+        {
+         
+
+            services.AddDbContext<RepositoryContext>(opts =>
          opts.UseSqlite(cofiguration.GetConnectionString("HSDbDev"))); // add the nuget package
-        public static void ConfigureSqlServerContext(this IServiceCollection services,
+        }
+        
+        /*public static void ConfigureSqlServerContext(this IServiceCollection services,
        IConfiguration cofiguration) =>
         services.AddDbContext<RepositoryContext>(opts =>
-        opts.UseSqlServer(cofiguration.GetConnectionString("HSDbProd"))); // add the nuget package 
+        opts.UseSqlServer(cofiguration.GetConnectionString("HSDbProd"))); // add the nuget package */
 
         /* public static void ConfigureIdentity(this IServiceCollection services)
          {

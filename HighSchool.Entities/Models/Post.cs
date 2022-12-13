@@ -1,9 +1,9 @@
 ﻿using System;
 namespace HighSchool.Entities.Models
 {
-    public class Page
+    public class Post
     {
-        public Guid PageId { get; set; }
+        public Guid PostId { get; set; }
         public string? Title { get; set; }
         public string? Content { get; set; }
         public string? Excerpt { get; set; }
@@ -11,7 +11,6 @@ namespace HighSchool.Entities.Models
         public string? MetaKeyWords { get; set; }
         public string? Slug { get; set; }
         public int? FeatureImageId { get; set; }
-
     }
 }
 

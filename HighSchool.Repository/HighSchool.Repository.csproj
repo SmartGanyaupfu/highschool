@@ -10,4 +10,10 @@
     <ProjectReference Include="..\HighSchool.Contracts\HighSchool.Contracts.csproj" />
     <ProjectReference Include="..\HighSchool.Entities\HighSchool.Entities.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="SeedDataConfig\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SeedDataConfig\" />
+  </ItemGroup>
 </Project>

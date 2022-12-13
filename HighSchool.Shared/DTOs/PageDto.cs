@@ -1,7 +1,7 @@
 ﻿using System;
-namespace HighSchool.Entities.Models
+namespace HighSchool.Shared.DTOs
 {
-    public class Page
+    public class PageDto
     {
         public Guid PageId { get; set; }
         public string? Title { get; set; }
@@ -12,6 +12,7 @@ namespace HighSchool.Entities.Models
         public string? Slug { get; set; }
         public int? FeatureImageId { get; set; }
 
+        public ImageDto? Image { get; set; }
     }
 }
 
