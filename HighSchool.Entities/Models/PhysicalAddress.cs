@@ -16,7 +16,7 @@ namespace HighSchool.Entities.Models
         public string? Province { get; set; }
 
         public string? Country { get; set; }
-        
+
     }
 }
 

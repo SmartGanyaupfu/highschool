@@ -12,8 +12,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="SeedDataConfig\" />
+    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SeedDataConfig\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

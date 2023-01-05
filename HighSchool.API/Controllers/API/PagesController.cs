@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using AutoMapper;
 using HighSchool.Contracts;
 using HighSchool.Entities.Models;
 using HighSchool.Shared.DTOs;
+using HighSchool.Shared.RequestFeatures;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,12 +28,12 @@ namespace HighSchool.API.Controllers.API
             _repository = repository;
             _mapper = mapper;
         }
-        /* // GET: api/values
+         // GET: api/values
          [HttpGet]
-         public async Task<IActionResult> GetPages([FromQuery] PageParameters pageParameters)
+         public async Task<IActionResult> GetPages([FromQuery] RequestParameters requestParameters)
          {
 
-             var pages = await _repository.Page.GetAllPagesAsync(pageParameters, trackChanges: false);
+             var pages = await _repository.Page.GetAllPagesAsync(requestParameters, trackChanges: false);
              Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pages.MetaData));
              var pagesToReturn = _mapper.Map<IEnumerable<PageDto>>(pages);
 
@@ -41,21 +43,21 @@ namespace HighSchool.API.Controllers.API
                  Image image;
 
 
-                 if (post.SgImageId != null)
+                 if (post.FeatureImageId != null)
                  {
-                     image = await _repository.Image.GetImageByIdAsync((int)post.SgImageId, trackChanges: false);
+                     image = await _repository.Image.GetImageByIdAsync((int)post.FeatureImageId, trackChanges: false);
                      post.Image = _mapper.Map<ImageDto>(image);
                  }
-                 Gallery gallery;
+                /* Gallery gallery;
                  if (post.SgGalleryId != null)
                  {
                      gallery = await _repository.Gallery.GetGalleryByIdAsync((int)post.SgGalleryId, trackChanges: false);
                      post.Gallery = _mapper.Map<GalleryDto>(gallery);
-                 }
+                 }*/
              }
              return Ok(pagesToReturn);
          }
-        */
+        
         // GET api/values/5
         [HttpGet("{pageId}", Name = "pagesId")]
         public async Task<IActionResult> GetPageById(Guid pageId)

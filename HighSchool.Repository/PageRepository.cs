@@ -3,6 +3,7 @@ using HighSchool.Contracts;
 using HighSchool.Entities.Models;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
+using HighSchool.Shared.RequestFeatures;
 
 namespace HighSchool.Repository
 {
@@ -19,20 +20,16 @@ namespace HighSchool.Repository
         }
         public void DeletePageAsync(Page page)
         {
-            Delete(page);
+            page.Deleted = true;
+            page.DateUpdated = DateTime.Now;
+            Update(page);
         }
 
-        /*public async Task<PagedList<Page>> GetAllPagesAsync(PageParameters pageParameters, bool trackChanges)
-        {
-            var pages = await FindAll(trackChanges).Search(pageParameters.SearchTerm).Include(b => b.ContentBlocks)
-                .OrderByDescending(p => p.DateCreated).ToListAsync();
-            var pr = PagedList<Page>.ToPagedList(pages, pageParameters.PageNumber, pageParameters.PageSize);
-            return pr;
-        }*/
+      
 
         public async Task<Page> GetPageByIdAsync(Guid pageId, bool trackChanges)
         {
-            return await FindByCondition(p => p.PageId.Equals(pageId), trackChanges).SingleOrDefaultAsync();
+            return await FindByCondition(p => p.PageId.Equals(pageId)&& p.Deleted==false, trackChanges).SingleOrDefaultAsync();
         }
 
         public void UpdatePageAsync(Page page)
@@ -46,7 +43,12 @@ namespace HighSchool.Repository
                 .SingleOrDefaultAsync();
         }
 
-       
+        public async Task<PagedList<Page>> GetAllPagesAsync(RequestParameters requestParameters, bool trackChanges)
+        {
+            var pages = await FindByCondition(p=>p.Deleted.Equals(false),trackChanges).OrderByDescending(p=>p.DateCreated).ToListAsync();
+
+            return PagedList<Page>.ToPagedList(pages, requestParameters.PageNumber, requestParameters.PageSize);
+        }
     }
 }
 

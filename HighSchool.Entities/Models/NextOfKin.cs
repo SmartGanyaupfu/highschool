@@ -3,9 +3,7 @@ namespace HighSchool.Entities.Models
 {
     public class NextOfKin
     {
-        public NextOfKin()
-        {
-        }
+        public int NextOfKinId { get; set; }
     }
 }
 

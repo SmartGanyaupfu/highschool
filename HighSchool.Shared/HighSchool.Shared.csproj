@@ -10,10 +10,12 @@
     <None Remove="DTOs\" />
     <None Remove="NETCore.MailKit" />
     <None Remove="Configs\" />
+    <None Remove="RequestFeatures\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="Configs\" />
+    <Folder Include="RequestFeatures\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NETCore.MailKit" Version="2.1.0" />

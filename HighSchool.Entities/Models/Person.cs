@@ -3,6 +3,7 @@ namespace HighSchool.Entities.Models
 {
     public class Person:BaseEntity
     {
+        
         public string? FirstName { get; set; }
 
         public string? LastName { get; set; }
@@ -30,7 +31,7 @@ namespace HighSchool.Entities.Models
         public string? LinkedIn { get; set; }
         public string? YouTube { get; set; }
 
-        public PhysicalAddress? physicalAddress { get; set; }
+       
         public int? PhysicalAddressId { get; set; }
     }
 }

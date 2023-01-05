@@ -33,6 +33,25 @@ namespace HighSchool.Repository
        public DbSet<Page> Pages { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Staff> Staff { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<NextOfKin> NextOfKins { get; set; }
+        public DbSet<ContentBlock> ContentBlocks { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<CourseWorkReport> CourseWorkReports { get; set; }
+        public DbSet<Note> Notes { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<LessonPlan> LessonPlans { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<PhysicalAddress> PhysicalAddresses { get; set; }
+        public DbSet<ProgressReport> ProgressReports { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Quiz> Quizzes { get; set; }
+        public DbSet<Widget> Widgets { get; set; }
+        public DbSet<AllocatedResource> AllocatedResources { get; set; }
+        public DbSet<EmployeeType> EmployeeTypes { get; set; }
+
 
     }
 }

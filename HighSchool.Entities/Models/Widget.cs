@@ -1,7 +1,7 @@
 ﻿using System;
 namespace HighSchool.Entities.Models
 {
-    public class Widget
+    public class Widget:BaseEntity
     {
         public int WidgetId { get; set; }
         public string? SkillBlock { get; set; }

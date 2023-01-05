@@ -1,7 +1,7 @@
 ﻿using System;
 namespace HighSchool.Entities.Models
 {
-    public class Post
+    public class Post:BaseEntity
     {
         public Guid PostId { get; set; }
         public string? Title { get; set; }
