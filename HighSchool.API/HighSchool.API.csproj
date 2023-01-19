@@ -23,11 +23,13 @@
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
     <None Remove="DbContextFactory\" />
     <None Remove="Controllers\API\" />
+    <None Remove="ActionFilters\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="DbContextFactory\" />
     <Folder Include="Controllers\API\" />
+    <Folder Include="ActionFilters\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HighSchool.LoggerService\HighSchool.LoggerService.csproj">

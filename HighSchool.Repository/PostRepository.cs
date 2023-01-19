@@ -1,6 +1,7 @@
 ﻿using System;
 using HighSchool.Contracts;
 using HighSchool.Entities.Models;
+using HighSchool.Shared.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
 
 namespace HighSchool.Repository
@@ -21,23 +22,35 @@ namespace HighSchool.Repository
             Delete(post);
         }
 
-       /* public async Task<PagedList<Post>> GetAllPostsAsync(PostParameters postParameters, bool trackChanges)
+        public async Task<PagedList<PostMV>> GetAllPostsAsync(PostParameters postParameters, bool trackChanges)
         {
-            var posts = await FindAll(trackChanges).Search(postParameters.SearchTerm).FilterPostsByAuthor(postParameters.Author).FilterPostsByCategory(postParameters.SgCategoryId)
-                .OrderByDescending(p => p.DateCreated).ToListAsync();
-            return PagedList<Post>.ToPagedList(posts, postParameters.PageNumber, postParameters.PageSize);
-        }*/
-
-        public async Task<Post> GetPostByIdAsync(Guid postId, bool trackChanges)
-        {
-            return await FindByCondition(p => p.PostId.Equals(postId), trackChanges)
-                .SingleOrDefaultAsync();
+            //var posts = await FindAll(trackChanges).Search(postParameters.SearchTerm).FilterPostsByAuthor(postParameters.Author).FilterPostsByCategory(postParameters.SgCategoryId)
+            //  .OrderByDescending(p => p.DateCreated).ToListAsync();
+            var posts = await FindAll(trackChanges)
+            .OrderByDescending(p => p.DateCreated).Select(p => new PostMV()
+            {
+                Post = p,
+                Categories = p.PostCats.Select(c => c.Category).ToList()
+            }).ToListAsync();
+            return PagedList<PostMV>.ToPagedList(posts, postParameters.PageNumber, postParameters.PageSize);
         }
 
-        public async Task<Post> GetPostBySlugNameAsync(string slug, bool trackChanges)
+        public async Task<PostMV> GetPostByIdAsync(Guid postId, bool trackChanges)
         {
-            return await FindByCondition(p => p.Slug.Equals(slug), trackChanges)
-                .SingleOrDefaultAsync();
+            return await FindByCondition(p => p.PostId.Equals(postId), trackChanges).Select(p => new PostMV()
+            {
+                Post = p,
+                Categories = p.PostCats.Select(c => c.Category).ToList()
+            }) .SingleOrDefaultAsync();
+        }
+
+        public async Task<PostMV> GetPostBySlugNameAsync(string slug, bool trackChanges)
+        {
+            return await FindByCondition(p => p.Slug.Equals(slug), trackChanges).Select(p => new PostMV()
+            {
+                Post = p,
+                Categories = p.PostCats.Select(c => c.Category).ToList()
+            }).SingleOrDefaultAsync();
         }
 
         public void UpdatePostAsync(Post post)

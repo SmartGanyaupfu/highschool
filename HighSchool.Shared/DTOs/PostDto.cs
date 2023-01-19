@@ -1,7 +1,7 @@
 ﻿using System;
-namespace HighSchool.Entities.Models
+namespace HighSchool.Shared.DTOs
 {
-    public class Post:BaseEntity
+    public class PostDto:BaseEntityDto
     {
         public Guid PostId { get; set; }
         public string? Title { get; set; }
@@ -11,10 +11,8 @@ namespace HighSchool.Entities.Models
         public string? MetaKeyWords { get; set; }
         public string? Slug { get; set; }
         public int? FeatureImageId { get; set; }
-
-        //public int? CategoryId { get; set; }
-
-        public ICollection<PostCat>? PostCats { get; set; }
+        public ImageDto? Image { get; set; }
+        public ICollection<PostCatDto>? PostCats { get; set; }
 
     }
 }

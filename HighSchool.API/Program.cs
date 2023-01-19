@@ -1,4 +1,5 @@
-﻿using HighSchool.API.Extensions;
+﻿using HighSchool.API.ActionFilters;
+using HighSchool.API.Extensions;
 using NLog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.ConfigureEmailService();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureLoggerService();
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<ValidationFilterAttribute>(); // registering action filters
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

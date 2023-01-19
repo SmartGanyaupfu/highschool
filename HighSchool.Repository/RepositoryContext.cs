@@ -23,14 +23,26 @@ namespace HighSchool.Repository
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<PostCat>()
+           .HasOne(pt => pt.Post)
+           .WithMany(p => p.PostCats)
+           .HasForeignKey(pt => pt.PostId);
+
+            modelBuilder.Entity<PostCat>()
+                .HasOne(pt => pt.Category)
+                .WithMany(t => t.PostCats)
+                .HasForeignKey(pt => pt.CategoryId);
+
 
             // modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new PageConfiguration());
             modelBuilder.ApplyConfiguration(new PostConfiguration());
             modelBuilder.ApplyConfiguration(new ImageConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
 
         }
-       public DbSet<Page> Pages { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Page> Pages { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Student> Students { get; set; }
@@ -51,6 +63,8 @@ namespace HighSchool.Repository
         public DbSet<Widget> Widgets { get; set; }
         public DbSet<AllocatedResource> AllocatedResources { get; set; }
         public DbSet<EmployeeType> EmployeeTypes { get; set; }
+
+        public DbSet<PostCat> PostCats { get; set; }
 
 
     }

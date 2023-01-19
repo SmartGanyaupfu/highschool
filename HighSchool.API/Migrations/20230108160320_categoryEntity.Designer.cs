@@ -3,6 +3,7 @@ using System;
 using HighSchool.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HighSchool.API.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20230108160320_categoryEntity")]
+    partial class categoryEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.11");
@@ -115,6 +117,9 @@ namespace HighSchool.API.Migrations
                     b.Property<string>("AuthorId")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("CourseId")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("TEXT");
 
@@ -130,6 +135,9 @@ namespace HighSchool.API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("PostId")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool?>("Published")
                         .HasColumnType("INTEGER");
 
@@ -138,14 +146,18 @@ namespace HighSchool.API.Migrations
 
                     b.HasKey("CategoryId");
 
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("PostId");
+
                     b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
                             CategoryId = 1,
-                            DateCreated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1400),
-                            DateUpdated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1410),
+                            DateCreated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(520),
+                            DateUpdated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(520),
                             Deleted = false,
                             Name = "Mobile",
                             Published = false,
@@ -154,8 +166,8 @@ namespace HighSchool.API.Migrations
                         new
                         {
                             CategoryId = 2,
-                            DateCreated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1410),
-                            DateUpdated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1410),
+                            DateCreated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(520),
+                            DateUpdated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(520),
                             Deleted = false,
                             Name = "Web",
                             Published = false,
@@ -552,10 +564,10 @@ namespace HighSchool.API.Migrations
                     b.HasData(
                         new
                         {
-                            PageId = new Guid("3fdd5df0-c2e8-4617-8a5f-ba1429a07c03"),
+                            PageId = new Guid("c0a198f0-6b74-4b1e-880e-cf0c34a74ac4"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1050),
-                            DateUpdated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1070),
+                            DateCreated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(110),
+                            DateUpdated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(130),
                             Deleted = false,
                             FeatureImageId = 1,
                             MetaDescription = "The inner was the inner",
@@ -566,10 +578,10 @@ namespace HighSchool.API.Migrations
                         },
                         new
                         {
-                            PageId = new Guid("c7dcbe3d-adab-4c68-8795-fa8ae41fe59b"),
+                            PageId = new Guid("d1db8b0d-c52c-4152-94cc-95a5413a8d87"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1120),
-                            DateUpdated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1120),
+                            DateCreated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(170),
+                            DateUpdated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(170),
                             Deleted = false,
                             FeatureImageId = 1,
                             MetaDescription = "The inner was the inner",
@@ -580,10 +592,10 @@ namespace HighSchool.API.Migrations
                         },
                         new
                         {
-                            PageId = new Guid("34eb4b1c-c03d-4522-b791-16af65c11848"),
+                            PageId = new Guid("df61487e-dd0a-4403-b092-30c13d2a691a"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1130),
-                            DateUpdated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1130),
+                            DateCreated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(180),
+                            DateUpdated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(180),
                             Deleted = false,
                             MetaDescription = "The inner was the inner",
                             MetaKeyWords = "test,tets,done",
@@ -726,10 +738,10 @@ namespace HighSchool.API.Migrations
                     b.HasData(
                         new
                         {
-                            PostId = new Guid("17f8e968-520e-4278-8bb7-7bfa2a3dd05c"),
+                            PostId = new Guid("d9715091-12b4-4f11-97bf-3157c584935d"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1280),
-                            DateUpdated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1280),
+                            DateCreated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(350),
+                            DateUpdated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(350),
                             Deleted = false,
                             FeatureImageId = 1,
                             MetaDescription = "The inner was the inner",
@@ -740,10 +752,10 @@ namespace HighSchool.API.Migrations
                         },
                         new
                         {
-                            PostId = new Guid("85813ee0-832e-4070-8562-da900be72e5d"),
+                            PostId = new Guid("d97fa73c-7777-44e5-8e2f-f28267d51ed4"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1290),
-                            DateUpdated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1290),
+                            DateCreated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(360),
+                            DateUpdated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(360),
                             Deleted = false,
                             FeatureImageId = 1,
                             MetaDescription = "The inner was the inner",
@@ -754,10 +766,10 @@ namespace HighSchool.API.Migrations
                         },
                         new
                         {
-                            PostId = new Guid("26e965b6-d999-457e-bddc-668fb6f7bc8f"),
+                            PostId = new Guid("6b7852ad-db12-46f2-8ecb-3f021e02cbbc"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1300),
-                            DateUpdated = new DateTime(2023, 1, 11, 14, 52, 35, 962, DateTimeKind.Local).AddTicks(1300),
+                            DateCreated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(370),
+                            DateUpdated = new DateTime(2023, 1, 8, 18, 3, 19, 875, DateTimeKind.Local).AddTicks(370),
                             Deleted = false,
                             MetaDescription = "The inner was the inner",
                             MetaKeyWords = "test,tets,done",
@@ -765,27 +777,6 @@ namespace HighSchool.API.Migrations
                             Slug = "contact",
                             Title = "Contact"
                         });
-                });
-
-            modelBuilder.Entity("HighSchool.Entities.Models.PostCat", b =>
-                {
-                    b.Property<int>("PostCatId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<Guid?>("PostId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("PostCatId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("PostCats");
                 });
 
             modelBuilder.Entity("HighSchool.Entities.Models.ProgressReport", b =>
@@ -1443,6 +1434,17 @@ namespace HighSchool.API.Migrations
                     b.Navigation("Question");
                 });
 
+            modelBuilder.Entity("HighSchool.Entities.Models.Category", b =>
+                {
+                    b.HasOne("HighSchool.Entities.Models.Course", null)
+                        .WithMany("Categories")
+                        .HasForeignKey("CourseId");
+
+                    b.HasOne("HighSchool.Entities.Models.Post", null)
+                        .WithMany("Categories")
+                        .HasForeignKey("PostId");
+                });
+
             modelBuilder.Entity("HighSchool.Entities.Models.CourseWorkReport", b =>
                 {
                     b.HasOne("HighSchool.Entities.Models.Student", null)
@@ -1491,21 +1493,6 @@ namespace HighSchool.API.Migrations
                         .HasForeignKey("InvoiceID");
 
                     b.Navigation("Invoice");
-                });
-
-            modelBuilder.Entity("HighSchool.Entities.Models.PostCat", b =>
-                {
-                    b.HasOne("HighSchool.Entities.Models.Category", "Category")
-                        .WithMany("PostCats")
-                        .HasForeignKey("CategoryId");
-
-                    b.HasOne("HighSchool.Entities.Models.Post", "Post")
-                        .WithMany("PostCats")
-                        .HasForeignKey("PostId");
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("HighSchool.Entities.Models.ProgressReport", b =>
@@ -1595,13 +1582,10 @@ namespace HighSchool.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HighSchool.Entities.Models.Category", b =>
-                {
-                    b.Navigation("PostCats");
-                });
-
             modelBuilder.Entity("HighSchool.Entities.Models.Course", b =>
                 {
+                    b.Navigation("Categories");
+
                     b.Navigation("Teachers");
                 });
 
@@ -1612,7 +1596,7 @@ namespace HighSchool.API.Migrations
 
             modelBuilder.Entity("HighSchool.Entities.Models.Post", b =>
                 {
-                    b.Navigation("PostCats");
+                    b.Navigation("Categories");
                 });
 
             modelBuilder.Entity("HighSchool.Entities.Models.Question", b =>

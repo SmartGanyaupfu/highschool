@@ -10,7 +10,18 @@ namespace HighSchool.API
         public MappingProfile()
         {
             CreateMap<Page, PageDto>();
-            //CreateMap<PageForCreationDto, Page>();
+            CreateMap<PageForCreationDto, Page>();
+            CreateMap<PageForUpdateDto, Page>();
+
+            CreateMap<Post, PostDto>();
+            CreateMap<PostMV, PostMVDto>();
+            CreateMap<PostForCreationDto, Post>();
+            CreateMap<PostForUpdateDto, Post>();
+
+            CreateMap<PostCat, PostCatDto>();
+
+            CreateMap<Category, CategoryDto>();
+            CreateMap<CategoryForCreationDto, Category>();
             //CreateMap<PageForUpdateDto, Page>();
 
             CreateMap<Image, ImageDto>();

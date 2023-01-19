@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoMapper;
+using HighSchool.API.ActionFilters;
+using HighSchool.API.Extensions;
 using HighSchool.Contracts;
 using HighSchool.Entities.Models;
 using HighSchool.Shared.DTOs;
@@ -89,28 +91,28 @@ namespace HighSchool.API.Controllers.API
             var page = await _repository.Page.GetPageBySlugNameAsync(pageSlug, trackChanges: false);
             if (page is null)
                 return NotFound();
-            /* var pageToReturn = _mapper.Map<PageDto>(page);
+            var pageToReturn = _mapper.Map<PageDto>(page);
 
-             Image image;
+            Image image;
 
 
-             if (page.SgImageId != null)
-             {
-                 image = await _repository.Image.GetImageByIdAsync((int)page.SgImageId, trackChanges: false);
-                 pageToReturn.Image = _mapper.Map<ImageDto>(image);
-             }
-             Gallery gallery;
+            if (page.FeatureImageId != null)
+            {
+                image = await _repository.Image.GetImageByIdAsync((int)page.FeatureImageId, trackChanges: false);
+                pageToReturn.Image = _mapper.Map<ImageDto>(image);
+            }
+            /* Gallery gallery;
              if (page.SgGalleryId != null)
              {
                  gallery = await _repository.Gallery.GetGalleryByIdAsync((int)page.SgGalleryId, trackChanges: false);
                  pageToReturn.Gallery = _mapper.Map<GalleryDto>(gallery);
              }*/
-            return Ok(page);
+            return Ok(pageToReturn);
         }
 
 
 
-        /* [Authorize]
+        //* [Authorize]
          [HttpPost]
          [ServiceFilter(typeof(ValidationFilterAttribute))]
          public async Task<IActionResult> CreatePage([FromBody] PageForCreationDto page)
@@ -119,7 +121,7 @@ namespace HighSchool.API.Controllers.API
 
              if (pagesFromDb != null)
              {
-                 page.Slug += "copy";
+                 page.Slug += "-copy";
              }
              page.AuthorId = User.GetUserId();
 
@@ -131,8 +133,8 @@ namespace HighSchool.API.Controllers.API
              //var votesToReturn = await _serviceManager.QualificationService.CreateQualificationForStudyOptionAsync(studyOptionId, qualification, trackChanges: false);
              return CreatedAtRoute("pagesId", new { pageId = pageToReturn.PageId }, pageToReturn);
          }
-
-         [Authorize]
+        /*
+        [Authorize]
          [HttpPost("{pageId}/add-block")]
          public async Task<IActionResult> AddBlock([FromBody] ContentBlockForCreationDto contentBlock, int pageId)
          {
@@ -151,11 +153,11 @@ namespace HighSchool.API.Controllers.API
 
              return CreatedAtRoute("pagesId", new { pageId = pageToReturn.PageId }, pageToReturn);
          }
-
-         [Authorize]
+        */
+        //[Authorize]
          [HttpPut("{pageId}")]
          [ServiceFilter(typeof(ValidationFilterAttribute))]
-         public async Task<IActionResult> UpdatePageById(int pageId, [FromBody] PageForUpdateDto page)
+         public async Task<IActionResult> UpdatePageById(Guid pageId, [FromBody] PageForUpdateDto page)
          {
              var pageFromDb = await _repository.Page.GetPageBySlugNameAsync(page.Slug, trackChanges: false);
 
@@ -175,8 +177,9 @@ namespace HighSchool.API.Controllers.API
 
              await _repository.SaveAsync();
              return NoContent();
-         }*/
-        [Authorize]
+         }
+        //[Authorize]
+        // Page is set to delete only
         [HttpDelete("{pageId}")]
         public async Task<IActionResult> DeleteValue(Guid pageId)
         {
@@ -185,7 +188,6 @@ namespace HighSchool.API.Controllers.API
             var pageEntity = await _repository.Page.GetPageByIdAsync(pageId: pageId, trackChanges: false);
             if (pageEntity is null)
                 return NotFound($"page with id {pageId} does not exist");
-
 
 
 

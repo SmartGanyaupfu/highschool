@@ -8,6 +8,7 @@ namespace HighSchool.Repository
         private readonly RepositoryContext _repositoryContext;
         private readonly Lazy<IPageRepository> _pageRepository;
         private readonly Lazy<IPostRepository> _postRepository;
+        private readonly Lazy<IPostCatRepository> _postCatRepository;
 
        // private readonly Lazy<ICategoryRepository> _categoryRepository;
         private readonly Lazy<IImageRepository> _imageRepository;
@@ -18,6 +19,8 @@ namespace HighSchool.Repository
             _pageRepository = new Lazy<IPageRepository>(() => new PageRepository(repositoryContext));
             _postRepository = new Lazy<IPostRepository>(() => new PostRepository(repositoryContext));
             _imageRepository = new Lazy<IImageRepository>(() => new ImageRepository(repositoryContext));
+            _postCatRepository = new Lazy<IPostCatRepository>(() => new PostCatRepository(repositoryContext));
+
         }
 
         public IPageRepository Page => _pageRepository.Value;
@@ -25,6 +28,8 @@ namespace HighSchool.Repository
         public IPostRepository Post => _postRepository.Value;
 
         public IImageRepository Image => _imageRepository.Value;
+
+        public IPostCatRepository PostCat => _postCatRepository.Value;
 
         public async Task SaveAsync()
         {

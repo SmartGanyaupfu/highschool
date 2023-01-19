@@ -1,8 +1,9 @@
 ﻿using System;
 namespace HighSchool.Shared.DTOs
 {
-    public class PageDto
+    public class PageDto:BaseEntityDto
     {
+
         public Guid PageId { get; set; }
         public string? Title { get; set; }
         public string? Content { get; set; }

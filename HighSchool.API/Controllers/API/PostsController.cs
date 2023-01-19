@@ -4,8 +4,13 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Threading.Tasks;
+using AutoMapper;
+using HighSchool.API.ActionFilters;
+using HighSchool.API.Extensions;
 using HighSchool.Contracts;
 using HighSchool.Entities.Models;
+using HighSchool.Shared.DTOs;
+using HighSchool.Shared.RequestFeatures;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Crypto;
@@ -19,12 +24,14 @@ namespace HighSchool.API.Controllers.API
     public class PostsController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
+        private readonly IMapper _mapper;
 
-        public PostsController(IRepositoryManager repository)
+        public PostsController(IRepositoryManager repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
-      /*  // GET: api/values
+        // GET: api/values
         [HttpGet]
         public async Task<IActionResult> GetPosts([FromQuery] PostParameters postParameters)
         {
@@ -33,33 +40,27 @@ namespace HighSchool.API.Controllers.API
 
 
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(posts.MetaData));
-            var postsToReturn = _mapper.Map<IEnumerable<PostDto>>(posts);
+            var postsToReturn = _mapper.Map<IEnumerable<PostMVDto>>(posts);
             foreach (var post in postsToReturn)
             {
-                Category category;
+               // Category category;
                 Image image;
 
-                if (post.SgCategoryId != null)
+         
+                if (post.Post.FeatureImageId != null)
                 {
-
-
-                    category = await _repository.Category.GetCategoryByIdAsync((int)post.SgCategoryId, trackChanges: false);
-                    post.Category = _mapper.Map<CategoryDto>(category);
+                    image = await _repository.Image.GetImageByIdAsync((int)post.Post.FeatureImageId, trackChanges: false);
+                    post.Post.Image = _mapper.Map<ImageDto>(image);
                 }
-                if (post.SgImageId != null)
-                {
-                    image = await _repository.Image.GetImageByIdAsync((int)post.SgImageId, trackChanges: false);
-                    post.Image = _mapper.Map<ImageDto>(image);
-                }
-                Gallery gallery;
+                /*Gallery gallery;
                 if (post.SgGalleryId != null)
                 {
                     gallery = await _repository.Gallery.GetGalleryByIdAsync((int)post.SgGalleryId, trackChanges: false);
                     post.Gallery = _mapper.Map<GalleryDto>(gallery);
-                }
+                }*/
             }
             return Ok(postsToReturn);
-        }*/
+        }
 
         // GET api/values/5
         [HttpGet("{postId}", Name = "postsId")]
@@ -68,33 +69,26 @@ namespace HighSchool.API.Controllers.API
             var post = await _repository.Post.GetPostByIdAsync(postId, trackChanges: false);
             if (post is null)
                 return NotFound();
-           /* int catId;
-
-            Category category;
+            
             Image image;
-            var postToReturn = _mapper.Map<PostDto>(post);
-            if (post.SgCategoryId != null)
+            //Gallery gallery;
+            var postToReturn = _mapper.Map<PostMVDto>(post);
+            
+            if (post.Post.FeatureImageId != null)
             {
-                catId = (int)post.SgCategoryId;
-
-                category = await _repository.Category.GetCategoryByIdAsync(catId, trackChanges: false);
-                postToReturn.Category = _mapper.Map<CategoryDto>(category);
+                image = await _repository.Image.GetImageByIdAsync((int)post.Post.FeatureImageId, trackChanges: false);
+                postToReturn.Post.Image = _mapper.Map<ImageDto>(image);
             }
-            if (post.SgImageId != null)
-            {
-                image = await _repository.Image.GetImageByIdAsync((int)post.SgImageId, trackChanges: false);
-                postToReturn.Image = _mapper.Map<ImageDto>(image);
-            }
-            Gallery gallery;
-            if (post.SgGalleryId != null)
-            {
-                gallery = await _repository.Gallery.GetGalleryByIdAsync((int)post.SgGalleryId, trackChanges: false);
-                postToReturn.Gallery = _mapper.Map<GalleryDto>(gallery);
-            }*/
+            /*  if (post.SgGalleryId != null)
+           {
+               gallery = await _repository.Gallery.GetGalleryByIdAsync((int)post.SgGalleryId, trackChanges: false);
+               postToReturn.Gallery = _mapper.Map<GalleryDto>(gallery);
+           }
+           var pageToReturn = _mapper.Map<PostDto>(post);*/
 
 
 
-            return Ok(post);
+            return Ok(postToReturn);
         }
         [HttpGet("slug/{postSlug}")]
         public async Task<IActionResult> GetPostBySlug(string postSlug)
@@ -102,35 +96,28 @@ namespace HighSchool.API.Controllers.API
             var post = await _repository.Post.GetPostBySlugNameAsync(postSlug, trackChanges: false);
             if (post is null)
                 return NotFound();
-           /* int catId;
-
-            Category category;
+        
             Image image;
-            Gallery gallery;
-            var postToReturn = _mapper.Map<PostDto>(post);
-            if (post.SgCategoryId != null)
-            {
-                catId = (int)post.SgCategoryId;
+          
+            //Gallery gallery;
+            var postToReturn = _mapper.Map<PostMVDto>(post);
 
-                category = await _repository.Category.GetCategoryByIdAsync(catId, trackChanges: false);
-                postToReturn.Category = _mapper.Map<CategoryDto>(category);
-            }
-            if (post.SgImageId != null)
+            if (post.Post.FeatureImageId != null)
             {
-                image = await _repository.Image.GetImageByIdAsync((int)post.SgImageId, trackChanges: false);
-                postToReturn.Image = _mapper.Map<ImageDto>(image);
+                image = await _repository.Image.GetImageByIdAsync((int)post.Post.FeatureImageId, trackChanges: false);
+                postToReturn.Post.Image = _mapper.Map<ImageDto>(image);
             }
-            if (post.SgGalleryId != null)
-            {
-                gallery = await _repository.Gallery.GetGalleryByIdAsync((int)post.SgGalleryId, trackChanges: false);
-                postToReturn.Gallery = _mapper.Map<GalleryDto>(gallery);
-            }
-            var pageToReturn = _mapper.Map<PostDto>(post);*/
-            return Ok(post);
+            /*  if (post.SgGalleryId != null)
+           {
+               gallery = await _repository.Gallery.GetGalleryByIdAsync((int)post.SgGalleryId, trackChanges: false);
+               postToReturn.Gallery = _mapper.Map<GalleryDto>(gallery);
+           }
+           var pageToReturn = _mapper.Map<PostDto>(post);*/
+            return Ok(postToReturn);
         }
+        
 
-
-        /*[Authorize]
+        //[Authorize]
         [HttpPost]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreatePost([FromBody] PostForCreationDto post)
@@ -147,54 +134,88 @@ namespace HighSchool.API.Controllers.API
             var postEntity = _mapper.Map<Post>(post);
             _repository.Post.CreatePostAsync(postEntity);
             await _repository.SaveAsync();
+
+            foreach( var categoryId in post.CategoryIds)
+            {
+                var postCat = new PostCat()
+                {
+                    PostId = postEntity.PostId,
+                    CategoryId = categoryId
+                };
+                _repository.PostCat.CreatePostCatAsync(postCat);
+                await _repository.SaveAsync();
+
+            }
             var postToReturn = _mapper.Map<PostDto>(postEntity);
 
             //var votesToReturn = await _serviceManager.QualificationService.CreateQualificationForStudyOptionAsync(studyOptionId, qualification, trackChanges: false);
             return CreatedAtRoute("postsId", new { PostId = postToReturn.PostId }, postToReturn);
         }
-        [Authorize]
-        [HttpPost("{postId}/add-block")]
-        public async Task<IActionResult> AddBlock([FromBody] ContentBlockForCreationDto contentBlock, Guid postId)
-        {
-            var postEntity = await _repository.Post.GetPostByIdAsync(postId, trackChanges: false);
-            if (postEntity is null)
-                return NotFound($"Post with id {postId} does not exist.");
+        /* [Authorize]
+      [HttpPost("{postId}/add-block")]
+      public async Task<IActionResult> AddBlock([FromBody] ContentBlockForCreationDto contentBlock, Guid postId)
+      {
+          var postEntity = await _repository.Post.GetPostByIdAsync(postId, trackChanges: false);
+          if (postEntity is null)
+              return NotFound($"Post with id {postId} does not exist.");
 
-            var blockEntity = _mapper.Map<ContentBlock>(contentBlock);
-            _repository.ContentBlock.CreateContentBlockAsync(blockEntity);
+          var blockEntity = _mapper.Map<ContentBlock>(contentBlock);
+          _repository.ContentBlock.CreateContentBlockAsync(blockEntity);
 
-            await _repository.SaveAsync();
+          await _repository.SaveAsync();
 
-            var postToReturn = _mapper.Map<PostDto>(postEntity);
+          var postToReturn = _mapper.Map<PostDto>(postEntity);
 
 
-            return CreatedAtRoute("postsId", new { postId = postToReturn.PostId }, postToReturn);
-        }
+          return CreatedAtRoute("postsId", new { postId = postToReturn.PostId }, postToReturn);
+      }
+        */
+   //[Authorize]
+      [HttpPut("{postId}")]
+      [ServiceFilter(typeof(ValidationFilterAttribute))]
+      public async Task<IActionResult> UpdatePostById(Guid postId, [FromBody] PostForUpdateDto post)
+      {
+          var postFromDb = await _repository.Post.GetPostBySlugNameAsync(post.Slug, trackChanges: false);
 
-        [Authorize]
-        [HttpPut("{postId}")]
-        [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> UpdatePostById(Guid postId, [FromBody] PostForUpdateDto post)
-        {
-            var postFromDb = await _repository.Post.GetPostBySlugNameAsync(post.Slug, trackChanges: false);
+          if (postFromDb != null && postFromDb.Post.PostId != postId)
+          {
+              post.Slug += "-copy";
+          }
+          post.AuthorId = User.GetUserId();
 
-            if (postFromDb != null && postFromDb.PostId != postId)
+          var postEntity = await _repository.Post.GetPostByIdAsync(postId, trackChanges: true);
+          if (postEntity is null)
+              return NotFound($"Post with id {postId} does not exist");
+
+
+
+          _mapper.Map(post, postEntity.Post);
+
+          await _repository.SaveAsync();
+            if (post.CategoryIds.Count > 0)
             {
-                post.Slug += "-copy";
+                var postCats = await _repository.PostCat.GetAllPostsAsync(postEntity.Post.PostId, trackChanges: false);
+
+                //delete the postcats before adding new ones
+
+                foreach( var postCat in postCats)
+                {
+                    _repository.PostCat.DeletePostCatAsync(postCat);
+                    await _repository.SaveAsync();
+                }
+                foreach (var categoryId in post.CategoryIds)
+                {
+                    var postCat = new PostCat()
+                    {
+                        PostId = postEntity.Post.PostId,
+                        CategoryId = categoryId
+                    };
+                    _repository.PostCat.CreatePostCatAsync(postCat);
+                    await _repository.SaveAsync();
+                }
             }
-            post.AuthorId = User.GetUserId();
-
-            var postEntity = await _repository.Post.GetPostByIdAsync(postId, trackChanges: true);
-            if (postEntity is null)
-                return NotFound($"Post with id {postId} does not exist");
-
-
-
-            _mapper.Map(post, postEntity);
-
-            await _repository.SaveAsync();
             return NoContent();
-        }*/
+      }
         [Authorize]
         [HttpDelete("{postId}")]
         public async Task<IActionResult> DeletePost(Guid postId)
@@ -208,7 +229,7 @@ namespace HighSchool.API.Controllers.API
 
 
 
-            _repository.Post.DeletePostAsync(postEntity);
+            _repository.Post.DeletePostAsync(postEntity.Post);
 
             await _repository.SaveAsync();
 

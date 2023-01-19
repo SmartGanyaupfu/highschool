@@ -8,6 +8,7 @@ namespace HighSchool.Contracts
         IPostRepository Post { get; }
 
         IImageRepository Image { get; }
+        IPostCatRepository PostCat { get; }
     }
 }
 

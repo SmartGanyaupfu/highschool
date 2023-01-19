@@ -1,13 +1,14 @@
 ﻿using System;
 using HighSchool.Entities.Models;
+using HighSchool.Shared.RequestFeatures;
 
 namespace HighSchool.Contracts
 {
     public interface IPostRepository
     {
-       // Task<PagedList<Post>> GetAllPostsAsync(PostParameters postParameters, bool trackChanges);
-        Task<Post> GetPostByIdAsync(Guid postId, bool trackChanges);
-        Task<Post> GetPostBySlugNameAsync(string slug, bool trackChanges);
+        Task<PagedList<PostMV>> GetAllPostsAsync(PostParameters postParameters, bool trackChanges);
+        Task<PostMV> GetPostByIdAsync(Guid postId, bool trackChanges);
+        Task<PostMV> GetPostBySlugNameAsync(string slug, bool trackChanges);
         void CreatePostAsync(Post post);
         void DeletePostAsync(Post post);
         void UpdatePostAsync(Post post);

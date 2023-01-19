@@ -16,12 +16,15 @@ namespace HighSchool.Repository
 
         public void CreatePageAsync(Page page)
         {
+            page.Published = true;
+            page.DatePublished = DateTime.Now;
             Create(page);
         }
         public void DeletePageAsync(Page page)
         {
             page.Deleted = true;
             page.DateUpdated = DateTime.Now;
+            page.Published = false;
             Update(page);
         }
 
