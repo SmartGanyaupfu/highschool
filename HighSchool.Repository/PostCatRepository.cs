@@ -32,7 +32,7 @@ namespace HighSchool.Repository
 
         public async Task<PostCat> GetPostCatByIdAsync(int postCatId, bool trackChanges)
         {
-            return await FindByCondition(p => p.PostId.Equals(postCatId), trackChanges).FirstOrDefaultAsync();
+            return await FindByCondition(p => p.PostCatId.Equals(postCatId), trackChanges).FirstOrDefaultAsync();
         }
 
         public void UpdatePostCatAsync(PostCat postCat)

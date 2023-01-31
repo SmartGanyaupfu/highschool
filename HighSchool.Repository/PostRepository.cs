@@ -17,9 +17,13 @@ namespace HighSchool.Repository
             Create(post);
         }
 
-        public void DeletePostAsync(Post post)
+        public void MoveToTrash(Post post)
         {
-            Delete(post);
+            post.Deleted = true;
+            post.DateUpdated = DateTime.Now;
+            post.Published = false;
+         
+            Update(post);
         }
 
         public async Task<PagedList<PostMV>> GetAllPostsAsync(PostParameters postParameters, bool trackChanges)
@@ -55,6 +59,24 @@ namespace HighSchool.Repository
 
         public void UpdatePostAsync(Post post)
         {
+            Update(post);
+        }
+
+        public void SetToDraft(Post post)
+        {
+            
+            post.DateUpdated = DateTime.Now;
+            post.Published = false;
+
+            Update(post);
+        }
+
+        public void Publish(Post post)
+        {
+            post.DateUpdated = DateTime.Now;
+            post.DatePublished = DateTime.Now;
+            post.Published = true;
+
             Update(post);
         }
     }

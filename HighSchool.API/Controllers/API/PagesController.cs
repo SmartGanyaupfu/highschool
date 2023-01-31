@@ -12,6 +12,7 @@ using HighSchool.Shared.DTOs;
 using HighSchool.Shared.RequestFeatures;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -125,7 +126,7 @@ namespace HighSchool.API.Controllers.API
              }
              page.AuthorId = User.GetUserId();
 
-             var pageEntity = _mapper.Map<Page>(page);
+             var pageEntity = _mapper.Map<Entities.Models.Page>(page);
              _repository.Page.CreatePageAsync(pageEntity);
              await _repository.SaveAsync();
              var pageToReturn = _mapper.Map<PageDto>(pageEntity);
@@ -191,7 +192,35 @@ namespace HighSchool.API.Controllers.API
 
 
 
-            _repository.Page.DeletePageAsync(pageEntity);
+            _repository.Page.MoveToTrash(pageEntity);
+
+            await _repository.SaveAsync();
+
+            return NoContent();
+        }
+
+        [HttpPut("publish/{pageId}")]
+        public async Task<IActionResult> PublishPost(Guid pageId)
+        {
+            var pageEntity = await _repository.Page.GetPageByIdAsync(pageId: pageId, trackChanges: false);
+            if (pageEntity is null)
+                return NotFound($"Page with id {pageId} does not exist");
+
+            _repository.Page.Publish(pageEntity);
+
+            await _repository.SaveAsync();
+
+            return NoContent();
+        }
+
+        [HttpPut("save-draft/{pageId}")]
+        public async Task<IActionResult> SetPageToDraft(Guid pageId)
+        {
+            var pageEntity = await _repository.Page.GetPageByIdAsync(pageId: pageId, trackChanges: false);
+            if (pageEntity is null)
+                return NotFound($"Page with id {pageId} does not exist");
+
+            _repository.Page.SetToDraft(pageEntity);
 
             await _repository.SaveAsync();
 

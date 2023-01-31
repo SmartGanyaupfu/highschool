@@ -10,7 +10,9 @@ namespace HighSchool.Contracts
         Task<PostMV> GetPostByIdAsync(Guid postId, bool trackChanges);
         Task<PostMV> GetPostBySlugNameAsync(string slug, bool trackChanges);
         void CreatePostAsync(Post post);
-        void DeletePostAsync(Post post);
+        void MoveToTrash(Post post);
+        void SetToDraft(Post post);
+        void Publish(Post post);
         void UpdatePostAsync(Post post);
     }
 }

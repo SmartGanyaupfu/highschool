@@ -24,14 +24,20 @@ namespace HighSchool.Repository
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<PostCat>()
+           .HasKey(t => new { t.PostId, t.CategoryId });
+
+            modelBuilder.Entity<PostCat>()
            .HasOne(pt => pt.Post)
            .WithMany(p => p.PostCats)
-           .HasForeignKey(pt => pt.PostId);
+           .HasForeignKey(pt => pt.PostId)
+           
+           .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<PostCat>()
                 .HasOne(pt => pt.Category)
                 .WithMany(t => t.PostCats)
-                .HasForeignKey(pt => pt.CategoryId);
+                .HasForeignKey(pt => pt.CategoryId)
+            .OnDelete(DeleteBehavior.Cascade);
 
 
             // modelBuilder.ApplyConfiguration(new RoleConfiguration());

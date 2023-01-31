@@ -126,7 +126,8 @@ namespace HighSchool.API.Controllers.API
 
             if (postsFromDb != null)
             {
-                post.Slug += "-copy";
+                Guid g = Guid.NewGuid();
+                post.Slug += g+"-copy";
             }
 
             post.AuthorId = User.GetUserId();
@@ -148,8 +149,22 @@ namespace HighSchool.API.Controllers.API
             }
             var postToReturn = _mapper.Map<PostDto>(postEntity);
 
+            var postFromDb = await _repository.Post.GetPostByIdAsync(postToReturn.PostId, trackChanges: false);
+            if (post is null)
+                return NotFound("Post created,but could not be found.");
+
+            Image image;
+            //Gallery gallery;
+            var postFromDbToReturn = _mapper.Map<PostMVDto>(postFromDb);
+
+            if (postFromDb.Post.FeatureImageId != null)
+            {
+                image = await _repository.Image.GetImageByIdAsync((int)postFromDb.Post.FeatureImageId, trackChanges: false);
+                postFromDbToReturn.Post.Image = _mapper.Map<ImageDto>(image);
+            }
+
             //var votesToReturn = await _serviceManager.QualificationService.CreateQualificationForStudyOptionAsync(studyOptionId, qualification, trackChanges: false);
-            return CreatedAtRoute("postsId", new { PostId = postToReturn.PostId }, postToReturn);
+            return Ok(postFromDbToReturn);
         }
         /* [Authorize]
       [HttpPost("{postId}/add-block")]
@@ -203,6 +218,8 @@ namespace HighSchool.API.Controllers.API
                     _repository.PostCat.DeletePostCatAsync(postCat);
                     await _repository.SaveAsync();
                 }
+
+                //adding new categories
                 foreach (var categoryId in post.CategoryIds)
                 {
                     var postCat = new PostCat()
@@ -216,9 +233,9 @@ namespace HighSchool.API.Controllers.API
             }
             return NoContent();
       }
-        [Authorize]
+        //[Authorize]
         [HttpDelete("{postId}")]
-        public async Task<IActionResult> DeletePost(Guid postId)
+        public async Task<IActionResult> MovePostToTrash(Guid postId)
         {
 
 
@@ -229,7 +246,46 @@ namespace HighSchool.API.Controllers.API
 
 
 
-            _repository.Post.DeletePostAsync(postEntity.Post);
+            _repository.Post.MoveToTrash(postEntity.Post);
+
+            await _repository.SaveAsync();
+
+            return NoContent();
+        }
+
+        [HttpDelete("postcat/{id}")]
+
+        public async Task<IActionResult> DeletePostCat(int id)
+        {
+            var postCat = await _repository.PostCat.GetPostCatByIdAsync(id, trackChanges: false);
+            _repository.PostCat.DeletePostCatAsync(postCat);
+            await _repository.SaveAsync();
+
+            return NoContent();
+        }
+
+        [HttpPut("publish/{postId}")]
+        public async Task<IActionResult> PublishPost( Guid postId)
+        {
+            var postEntity = await _repository.Post.GetPostByIdAsync(postId: postId, trackChanges: false);
+            if (postEntity is null)
+                return NotFound($"Post with id {postId} does not exist");
+
+            _repository.Post.Publish(postEntity.Post);
+
+            await _repository.SaveAsync();
+
+            return NoContent();
+        }
+
+        [HttpPut("save-draft/{postId}")]
+        public async Task<IActionResult> SetPostToDraft(Guid postId)
+        {
+            var postEntity = await _repository.Post.GetPostByIdAsync(postId: postId, trackChanges: false);
+            if (postEntity is null)
+                return NotFound($"Post with id {postId} does not exist");
+
+            _repository.Post.SetToDraft(postEntity.Post);
 
             await _repository.SaveAsync();
 

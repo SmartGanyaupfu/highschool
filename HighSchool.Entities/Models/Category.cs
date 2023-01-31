@@ -7,7 +7,7 @@ namespace HighSchool.Entities.Models
         public string? Name { get; set; }
         public string? Slug { get; set; }
 
-        public ICollection<PostCat>? PostCats { get; set; }
+        public ICollection<PostCat> PostCats { get; set; }
     }
 }
 

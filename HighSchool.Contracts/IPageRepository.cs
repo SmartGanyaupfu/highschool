@@ -12,7 +12,9 @@ namespace HighSchool.Contracts
         Task<Page> GetPageByIdAsync(Guid pageId, bool trackChanges);
         Task<Page> GetPageBySlugNameAsync(string slug, bool trackChanges);
         void CreatePageAsync(Page page);
-        void DeletePageAsync(Page page);
+        void MoveToTrash(Page page);
+        void SetToDraft(Page page);
+        void Publish(Page page);
         void UpdatePageAsync(Page page);
     }
 }

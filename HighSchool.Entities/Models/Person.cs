@@ -30,9 +30,10 @@ namespace HighSchool.Entities.Models
         public string? Instagram { get; set; }
         public string? LinkedIn { get; set; }
         public string? YouTube { get; set; }
+        public string? Slug { get; set; }
 
-       
-        public int? PhysicalAddressId { get; set; }
+
+        public int? AddressId { get; set; }
     }
 }
 

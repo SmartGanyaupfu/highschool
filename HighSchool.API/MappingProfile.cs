@@ -22,7 +22,8 @@ namespace HighSchool.API
 
             CreateMap<Category, CategoryDto>();
             CreateMap<CategoryForCreationDto, Category>();
-            //CreateMap<PageForUpdateDto, Page>();
+            CreateMap<CategoryForUpdateDto, Category>();
+            
 
             CreateMap<Image, ImageDto>();
         }

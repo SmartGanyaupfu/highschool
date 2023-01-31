@@ -14,7 +14,7 @@ namespace HighSchool.Entities.Models
 
         //public int? CategoryId { get; set; }
 
-        public ICollection<PostCat>? PostCats { get; set; }
+        public ICollection<PostCat> PostCats { get; set; }
 
     }
 }

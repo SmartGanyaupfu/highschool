@@ -9,6 +9,13 @@ namespace HighSchool.Contracts
 
         IImageRepository Image { get; }
         IPostCatRepository PostCat { get; }
+        ICategoryRepository Category { get; }
+        IStudentRepository Student { get; }
+        IStaffRepository Staff { get; }
+        INextOfKinRepository NextOfKin { get; }
+        IContentBlockRepository ContentBlock { get; }
+        ICourseRepository Course { get; }
+        IEmployeeTypeRepository EmployeeType { get; }
     }
 }
 

@@ -20,7 +20,7 @@ namespace HighSchool.Repository
             page.DatePublished = DateTime.Now;
             Create(page);
         }
-        public void DeletePageAsync(Page page)
+        public void MoveToTrash(Page page)
         {
             page.Deleted = true;
             page.DateUpdated = DateTime.Now;
@@ -51,6 +51,21 @@ namespace HighSchool.Repository
             var pages = await FindByCondition(p=>p.Deleted.Equals(false),trackChanges).OrderByDescending(p=>p.DateCreated).ToListAsync();
 
             return PagedList<Page>.ToPagedList(pages, requestParameters.PageNumber, requestParameters.PageSize);
+        }
+
+        public void SetToDraft(Page page)
+        {
+            page.DateUpdated = DateTime.Now;
+            page.Published = false;
+            Update(page);
+        }
+
+        public void Publish(Page page)
+        {
+            page.DateUpdated = DateTime.Now;
+            page.DatePublished = DateTime.Now;
+            page.Published = true;
+            Update(page);
         }
     }
 }
