@@ -8,7 +8,7 @@ namespace HighSchool.Entities.Models
         public decimal? AmountPaid { get; set; }
         public string? PaymentMethod { get; set; }
         public string? Note { get; set; }
-        public int? InvoiceID { get; set; }
+        public int InvoiceID { get; set; }
         public Invoice? Invoice { get; set; }
     }
 }

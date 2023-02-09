@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using HighSchool.API.ActionFilters;
 using HighSchool.API.Extensions;
+using HighSchool.API.Migrations;
 using HighSchool.Contracts;
 using HighSchool.Entities.Models;
 using HighSchool.Shared.DTOs;
@@ -253,12 +254,16 @@ namespace HighSchool.API.Controllers.API
             return NoContent();
         }
 
-        [HttpDelete("postcat/{id}")]
+        [HttpDelete("permanentDelete/{postId}")]
 
-        public async Task<IActionResult> DeletePostCat(int id)
+        public async Task<IActionResult> DeletePostPermanently(Guid postId)
         {
-            var postCat = await _repository.PostCat.GetPostCatByIdAsync(id, trackChanges: false);
-            _repository.PostCat.DeletePostCatAsync(postCat);
+            var postEntity = await _repository.Post.GetPostByIdAsync(postId, trackChanges: false);
+
+            if (postEntity is null)
+                return NotFound($"Post with id {postId} does not exist");
+
+            _repository.Post.PermanentDelete(postEntity.Post);
             await _repository.SaveAsync();
 
             return NoContent();

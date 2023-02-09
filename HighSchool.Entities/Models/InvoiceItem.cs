@@ -11,7 +11,7 @@ namespace HighSchool.Entities.Models
         
         public decimal? Total { get; set; }
 
-        public int? InvoiceID { get; set; }
+        public int InvoiceID { get; set; }
     }
 }
 

@@ -40,6 +40,55 @@ namespace HighSchool.Repository
             .OnDelete(DeleteBehavior.Cascade);
 
 
+            modelBuilder.Entity<StaffCourse>()
+         .HasKey(t => new { t.StaffId, t.CourseId });
+
+            modelBuilder.Entity<StaffCourse>()
+           .HasOne(pt => pt.Staff)
+           .WithMany(p => p.StaffCourses)
+           .HasForeignKey(pt => pt.StaffId)
+
+           .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<StaffCourse>()
+                .HasOne(pt => pt.Course)
+                .WithMany(t => t.StaffCourses)
+                .HasForeignKey(pt => pt.CourseId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<StudentGrade>()
+      .HasKey(t => new { t.StudentId, t.GradeId });
+
+            modelBuilder.Entity<StudentGrade>()
+           .HasOne(pt => pt.Student)
+           .WithMany(p => p.StudentGrades)
+           .HasForeignKey(pt => pt.StudentId)
+
+           .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<StudentGrade>()
+                .HasOne(pt => pt.Grade)
+                .WithMany(t => t.StudentGrades)
+                .HasForeignKey(pt => pt.GradeId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<StudentGraduate>()
+   .HasKey(t => new { t.StudentId, t.GraduateId });
+
+            modelBuilder.Entity<StudentGraduate>()
+           .HasOne(pt => pt.Student)
+           .WithMany(p => p.StudentGraduates)
+           .HasForeignKey(pt => pt.StudentId)
+
+           .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<StudentGraduate>()
+                .HasOne(pt => pt.Graduate)
+                .WithMany(t => t.StudentGraduates)
+                .HasForeignKey(pt => pt.GraduateId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+
             // modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new PageConfiguration());
             modelBuilder.ApplyConfiguration(new PostConfiguration());
@@ -63,14 +112,15 @@ namespace HighSchool.Repository
         public DbSet<LessonPlan> LessonPlans { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<PhysicalAddress> PhysicalAddresses { get; set; }
-        public DbSet<ProgressReport> ProgressReports { get; set; }
         public DbSet<Question> Questions { get; set; }
-        public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<Widget> Widgets { get; set; }
         public DbSet<AllocatedResource> AllocatedResources { get; set; }
         public DbSet<EmployeeType> EmployeeTypes { get; set; }
 
         public DbSet<PostCat> PostCats { get; set; }
+        public DbSet<StaffCourse> StffCourses { get; set; }
+        public DbSet<StudentGrade> StudentGrades { get; set; }
+        public DbSet<StudentGraduate> StudentGraduates { get; set; }
 
 
     }

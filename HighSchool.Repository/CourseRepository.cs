@@ -20,21 +20,39 @@ namespace HighSchool.Repository
             Create(course);
         }
 
-        public async Task<PagedList<Course>> GetAllCourseAsync(RequestParameters requestParameters, bool trackChanges)
+        public async Task<PagedList<CourseMV>> GetAllCourseAsync(RequestParameters requestParameters, bool trackChanges)
         {
-            var courses = await FindByCondition(s => s.Deleted.Equals(false), trackChanges).OrderByDescending(p => p.DateCreated).ToListAsync();
+            var courses = await FindByCondition(s => s.Deleted.Equals(false), trackChanges).OrderByDescending(p => p.DateCreated).Select(
+                c => new CourseMV()
+                {
+                    Course = c,
+                    Teachers = c.StaffCourses.Select(sc => sc.Staff).ToList()
+                }
+                ).ToListAsync();
 
-            return PagedList<Course>.ToPagedList(courses, requestParameters.PageNumber, requestParameters.PageSize);
+            return PagedList<CourseMV>.ToPagedList(courses, requestParameters.PageNumber, requestParameters.PageSize);
         }
 
-        public async Task<Course> GetCourseByIdAsync(int courseId, bool trackChanges)
+        public async Task<CourseMV> GetCourseByIdAsync(int courseId, bool trackChanges)
         {
-            return await FindByCondition(p => p.CourseId.Equals(courseId) && p.Deleted == false, trackChanges).SingleOrDefaultAsync();
+            return await FindByCondition(p => p.CourseId.Equals(courseId) && p.Deleted == false, trackChanges).Select(
+                c => new CourseMV()
+                {
+                    Course = c,
+                    Teachers = c.StaffCourses.Select(sc => sc.Staff).ToList()
+                }
+                ).SingleOrDefaultAsync();
         }
 
-        public async Task<Course> GetCourseBySlugAsync(string slug, bool trackChanges)
+        public async Task<CourseMV> GetCourseBySlugAsync(string slug, bool trackChanges)
         {
-            return await FindByCondition(p => p.Slug.Equals(slug) && p.Deleted == false, trackChanges).SingleOrDefaultAsync();
+            return await FindByCondition(p => p.Slug.Equals(slug) && p.Deleted == false, trackChanges).Select(
+                c => new CourseMV()
+                {
+                    Course = c,
+                    Teachers = c.StaffCourses.Select(sc => sc.Staff).ToList()
+                }
+                ).SingleOrDefaultAsync();
         }
 
         public void MoveToTrash(Course course)
@@ -43,6 +61,11 @@ namespace HighSchool.Repository
             course.DateUpdated = DateTime.Now;
             course.Published = false;
             Update(course);
+        }
+
+        public void PermanentDelete(Course course)
+        {
+            Delete(course);
         }
 
         public void Publish(Course course)

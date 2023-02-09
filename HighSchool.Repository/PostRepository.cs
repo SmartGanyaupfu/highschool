@@ -79,6 +79,11 @@ namespace HighSchool.Repository
 
             Update(post);
         }
+
+        public void PermanentDelete(Post post)
+        {
+            Delete(post);
+        }
     }
 }
 

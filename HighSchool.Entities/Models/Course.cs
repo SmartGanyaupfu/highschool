@@ -18,7 +18,7 @@ namespace HighSchool.Entities.Models
         public string? CareerOpportunites { get; set; }
         public string? Duration { get; set; }
         public string? Faculty { get; set; }
-        public ICollection<Staff>? Teachers { get; set; }
+        public ICollection<StaffCourse>? StaffCourses { get; set; }
     }
 }
 

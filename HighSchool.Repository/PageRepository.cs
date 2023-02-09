@@ -67,6 +67,11 @@ namespace HighSchool.Repository
             page.Published = true;
             Update(page);
         }
+
+        public void PermanentDelete(Page page)
+        {
+            Delete(page);
+        }
     }
 }
 

@@ -9,7 +9,7 @@ namespace HighSchool.Entities.Models
         public string? Status { get; set; }
         public DateTime? DateReturned { get; set; }
         public Student? Student { get; set; }
-        public Guid? StudentId { get; set; }
+        public Guid StudentId { get; set; }
     }
 }
 

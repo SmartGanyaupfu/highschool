@@ -5,6 +5,8 @@ namespace HighSchool.Entities.Models
     {
         public int EmployeeTypeId { get; set; }
         public string? Type { get; set; }
+
+       
      
     }
 }

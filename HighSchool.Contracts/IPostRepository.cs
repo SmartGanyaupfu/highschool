@@ -14,6 +14,7 @@ namespace HighSchool.Contracts
         void SetToDraft(Post post);
         void Publish(Post post);
         void UpdatePostAsync(Post post);
+        void PermanentDelete(Post post);
     }
 }
 

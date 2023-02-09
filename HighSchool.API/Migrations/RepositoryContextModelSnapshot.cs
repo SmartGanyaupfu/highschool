@@ -50,7 +50,7 @@ namespace HighSchool.API.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("StudentId")
+                    b.Property<Guid>("StudentId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -96,7 +96,7 @@ namespace HighSchool.API.Migrations
                     b.Property<bool?>("Published")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("QuestionId")
+                    b.Property<int>("QuestionId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("AnswerId");
@@ -144,8 +144,8 @@ namespace HighSchool.API.Migrations
                         new
                         {
                             CategoryId = 1,
-                            DateCreated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9290),
-                            DateUpdated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9290),
+                            DateCreated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8670),
+                            DateUpdated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8670),
                             Deleted = false,
                             Name = "Mobile",
                             Published = false,
@@ -154,8 +154,8 @@ namespace HighSchool.API.Migrations
                         new
                         {
                             CategoryId = 2,
-                            DateCreated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9300),
-                            DateUpdated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9300),
+                            DateCreated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8670),
+                            DateUpdated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8680),
                             Deleted = false,
                             Name = "Web",
                             Published = false,
@@ -272,10 +272,56 @@ namespace HighSchool.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("StudentId")
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ClassGradeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DatePublished")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DateUpdated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool?>("Deleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("HClassId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("MarkObtained")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("PossibleMark")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Published")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Term")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Year")
                         .HasColumnType("TEXT");
 
                     b.HasKey("CourseWorkReportId");
+
+                    b.HasIndex("ClassGradeId");
+
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("StudentId");
 
@@ -312,6 +358,68 @@ namespace HighSchool.API.Migrations
                     b.HasKey("EmployeeTypeId");
 
                     b.ToTable("EmployeeTypes");
+                });
+
+            modelBuilder.Entity("HighSchool.Entities.Models.Grade", b =>
+                {
+                    b.Property<int>("GradeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DatePublished")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DateUpdated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool?>("Deleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Level")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool?>("Published")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("StaffId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Year")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("GradeId");
+
+                    b.HasIndex("StaffId");
+
+                    b.ToTable("Grade");
+                });
+
+            modelBuilder.Entity("HighSchool.Entities.Models.Graduate", b =>
+                {
+                    b.Property<int>("GraduateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("GradeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("Year")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("GraduateId");
+
+                    b.HasIndex("GradeId");
+
+                    b.ToTable("Graduate");
                 });
 
             modelBuilder.Entity("HighSchool.Entities.Models.Image", b =>
@@ -398,7 +506,7 @@ namespace HighSchool.API.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("StudentId")
+                    b.Property<Guid>("StudentId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Term")
@@ -420,7 +528,7 @@ namespace HighSchool.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("InvoiceID")
+                    b.Property<int>("InvoiceID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Item")
@@ -448,10 +556,28 @@ namespace HighSchool.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Content")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("StaffId")
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DatePublished")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DateUpdated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool?>("Deleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Published")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("StaffId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -589,7 +715,7 @@ namespace HighSchool.API.Migrations
                     b.Property<bool?>("Published")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("StudentId")
+                    b.Property<Guid>("StudentId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -654,10 +780,10 @@ namespace HighSchool.API.Migrations
                     b.HasData(
                         new
                         {
-                            PageId = new Guid("2beeba5e-b635-46bb-beed-f372759d29cd"),
+                            PageId = new Guid("0486fd60-4d09-410f-993f-7ae492030f78"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(8930),
-                            DateUpdated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(8960),
+                            DateCreated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8030),
+                            DateUpdated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8060),
                             Deleted = false,
                             FeatureImageId = 1,
                             MetaDescription = "The inner was the inner",
@@ -668,10 +794,10 @@ namespace HighSchool.API.Migrations
                         },
                         new
                         {
-                            PageId = new Guid("328084b0-53ed-41a3-936b-8fd094756e98"),
+                            PageId = new Guid("64187c4b-9bcf-453c-9c80-343acb80332d"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9010),
-                            DateUpdated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9010),
+                            DateCreated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8130),
+                            DateUpdated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8130),
                             Deleted = false,
                             FeatureImageId = 1,
                             MetaDescription = "The inner was the inner",
@@ -682,10 +808,10 @@ namespace HighSchool.API.Migrations
                         },
                         new
                         {
-                            PageId = new Guid("3a1c5975-6c81-439b-b60d-7d239db7ffae"),
+                            PageId = new Guid("cdf49db3-c270-4050-9371-b4eea58d8c81"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9010),
-                            DateUpdated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9010),
+                            DateCreated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8140),
+                            DateUpdated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8140),
                             Deleted = false,
                             MetaDescription = "The inner was the inner",
                             MetaKeyWords = "test,tets,done",
@@ -722,7 +848,7 @@ namespace HighSchool.API.Migrations
                     b.Property<bool?>("Deleted")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("InvoiceID")
+                    b.Property<int>("InvoiceID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Note")
@@ -828,10 +954,10 @@ namespace HighSchool.API.Migrations
                     b.HasData(
                         new
                         {
-                            PostId = new Guid("660e7e10-e60e-446e-bdce-d40e0044f968"),
+                            PostId = new Guid("fd4e1ce1-938d-4449-9cc0-6e249eb0f1d4"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9170),
-                            DateUpdated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9170),
+                            DateCreated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8440),
+                            DateUpdated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8440),
                             Deleted = false,
                             FeatureImageId = 1,
                             MetaDescription = "The inner was the inner",
@@ -842,10 +968,10 @@ namespace HighSchool.API.Migrations
                         },
                         new
                         {
-                            PostId = new Guid("07c96293-f5d1-4977-af9d-735b3c4f3855"),
+                            PostId = new Guid("84cfb7bf-840a-4b7c-8882-713fc112fc5a"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9180),
-                            DateUpdated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9180),
+                            DateCreated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8460),
+                            DateUpdated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8460),
                             Deleted = false,
                             FeatureImageId = 1,
                             MetaDescription = "The inner was the inner",
@@ -856,10 +982,10 @@ namespace HighSchool.API.Migrations
                         },
                         new
                         {
-                            PostId = new Guid("125dd233-e4e9-41c1-a304-308946056d6c"),
+                            PostId = new Guid("cbd67c3b-721c-4726-b380-f6bd4637987a"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9180),
-                            DateUpdated = new DateTime(2023, 1, 30, 19, 7, 35, 612, DateTimeKind.Local).AddTicks(9180),
+                            DateCreated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8470),
+                            DateUpdated = new DateTime(2023, 2, 9, 6, 52, 59, 753, DateTimeKind.Local).AddTicks(8470),
                             Deleted = false,
                             MetaDescription = "The inner was the inner",
                             MetaKeyWords = "test,tets,done",
@@ -887,49 +1013,6 @@ namespace HighSchool.API.Migrations
                     b.ToTable("PostCats");
                 });
 
-            modelBuilder.Entity("HighSchool.Entities.Models.ProgressReport", b =>
-                {
-                    b.Property<int>("ProgressReportId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("AuthorId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ClassTeacher")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("DateCreated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("DatePublished")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("DateUpdated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool?>("Deleted")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool?>("Published")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<Guid?>("StudentId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Term")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("Year")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ProgressReportId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("ProgressReports");
-                });
-
             modelBuilder.Entity("HighSchool.Entities.Models.Question", b =>
                 {
                     b.Property<int>("QuestionId")
@@ -951,52 +1034,21 @@ namespace HighSchool.API.Migrations
                     b.Property<bool?>("Deleted")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool?>("Published")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("QuizId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Slug")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
                     b.HasKey("QuestionId");
 
-                    b.HasIndex("QuizId");
-
                     b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("HighSchool.Entities.Models.Quiz", b =>
-                {
-                    b.Property<int>("QuizId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("AuthorId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("DateCreated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("DatePublished")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("DateUpdated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool?>("Deleted")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool?>("Published")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("QuizId");
-
-                    b.ToTable("Quizzes");
                 });
 
             modelBuilder.Entity("HighSchool.Entities.Models.Staff", b =>
@@ -1009,9 +1061,6 @@ namespace HighSchool.API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("AuthorId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("CourseId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("DateCreated")
@@ -1032,7 +1081,7 @@ namespace HighSchool.API.Migrations
                     b.Property<string>("EmailAddress")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("EmployeeTypeId")
+                    b.Property<int>("EmployeeTypeId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Employer")
@@ -1106,11 +1155,25 @@ namespace HighSchool.API.Migrations
 
                     b.HasKey("StaffId");
 
+                    b.ToTable("Staff");
+                });
+
+            modelBuilder.Entity("HighSchool.Entities.Models.StaffCourse", b =>
+                {
+                    b.Property<Guid>("StaffId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StaffCourseId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("StaffId", "CourseId");
+
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("EmployeeTypeId");
-
-                    b.ToTable("Staff");
+                    b.ToTable("StffCourses");
                 });
 
             modelBuilder.Entity("HighSchool.Entities.Models.Student", b =>
@@ -1123,9 +1186,6 @@ namespace HighSchool.API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("AuthorId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Class")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("DateCreated")
@@ -1216,6 +1276,42 @@ namespace HighSchool.API.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("HighSchool.Entities.Models.StudentGrade", b =>
+                {
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("GradeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StudentGradeId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("StudentId", "GradeId");
+
+                    b.HasIndex("GradeId");
+
+                    b.ToTable("StudentGrades");
+                });
+
+            modelBuilder.Entity("HighSchool.Entities.Models.StudentGraduate", b =>
+                {
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("GraduateId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StudentGraduateId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("StudentId", "GraduateId");
+
+                    b.HasIndex("GraduateId");
+
+                    b.ToTable("StudentGraduates");
+                });
+
             modelBuilder.Entity("HighSchool.Entities.Models.Widget", b =>
                 {
                     b.Property<int>("WidgetId")
@@ -1226,9 +1322,6 @@ namespace HighSchool.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ContactPage")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CvUrl")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("DateCreated")
@@ -1242,9 +1335,6 @@ namespace HighSchool.API.Migrations
 
                     b.Property<bool?>("Deleted")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("EducationBlock")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
@@ -1267,9 +1357,6 @@ namespace HighSchool.API.Migrations
                     b.Property<string>("GitHubUrl")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("HireMeBlock")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("HomePage")
                         .HasColumnType("TEXT");
 
@@ -1279,13 +1366,7 @@ namespace HighSchool.API.Migrations
                     b.Property<string>("InstagramUrl")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("InterestBlock")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Intro")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LearnToCode")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LinkedInUrl")
@@ -1294,13 +1375,13 @@ namespace HighSchool.API.Migrations
                     b.Property<string>("LogoUrl")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("MissionStatemnetBlock")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Phone")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PostPageSize")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ProfilePicture")
                         .HasColumnType("TEXT");
 
                     b.Property<bool?>("Published")
@@ -1315,7 +1396,10 @@ namespace HighSchool.API.Migrations
                     b.Property<string>("TwitterUrl")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("WorkBlock")
+                    b.Property<string>("ValuesBlock")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("VissionBlock")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("YouTubeUrl")
@@ -1534,7 +1618,9 @@ namespace HighSchool.API.Migrations
                 {
                     b.HasOne("HighSchool.Entities.Models.Student", "Student")
                         .WithMany("AllocatedResources")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Student");
                 });
@@ -1543,23 +1629,67 @@ namespace HighSchool.API.Migrations
                 {
                     b.HasOne("HighSchool.Entities.Models.Question", "Question")
                         .WithMany("Answers")
-                        .HasForeignKey("QuestionId");
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Question");
                 });
 
             modelBuilder.Entity("HighSchool.Entities.Models.CourseWorkReport", b =>
                 {
-                    b.HasOne("HighSchool.Entities.Models.Student", null)
+                    b.HasOne("HighSchool.Entities.Models.Grade", "Class")
+                        .WithMany()
+                        .HasForeignKey("ClassGradeId");
+
+                    b.HasOne("HighSchool.Entities.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HighSchool.Entities.Models.Student", "Student")
                         .WithMany("CourseWorkReports")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("HighSchool.Entities.Models.Grade", b =>
+                {
+                    b.HasOne("HighSchool.Entities.Models.Staff", "ClassTeacher")
+                        .WithMany()
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassTeacher");
+                });
+
+            modelBuilder.Entity("HighSchool.Entities.Models.Graduate", b =>
+                {
+                    b.HasOne("HighSchool.Entities.Models.Grade", "Grade")
+                        .WithMany()
+                        .HasForeignKey("GradeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Grade");
                 });
 
             modelBuilder.Entity("HighSchool.Entities.Models.Invoice", b =>
                 {
                     b.HasOne("HighSchool.Entities.Models.Student", "Student")
                         .WithMany("Invoices")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Student");
                 });
@@ -1568,14 +1698,18 @@ namespace HighSchool.API.Migrations
                 {
                     b.HasOne("HighSchool.Entities.Models.Invoice", null)
                         .WithMany("InvoiceItems")
-                        .HasForeignKey("InvoiceID");
+                        .HasForeignKey("InvoiceID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HighSchool.Entities.Models.LessonPlan", b =>
                 {
                     b.HasOne("HighSchool.Entities.Models.Staff", "Teacher")
                         .WithMany("LessonPlans")
-                        .HasForeignKey("StaffId");
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Teacher");
                 });
@@ -1584,7 +1718,9 @@ namespace HighSchool.API.Migrations
                 {
                     b.HasOne("HighSchool.Entities.Models.Student", "Student")
                         .WithMany("Notes")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Student");
                 });
@@ -1593,7 +1729,9 @@ namespace HighSchool.API.Migrations
                 {
                     b.HasOne("HighSchool.Entities.Models.Invoice", "Invoice")
                         .WithMany()
-                        .HasForeignKey("InvoiceID");
+                        .HasForeignKey("InvoiceID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Invoice");
                 });
@@ -1617,31 +1755,23 @@ namespace HighSchool.API.Migrations
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("HighSchool.Entities.Models.ProgressReport", b =>
+            modelBuilder.Entity("HighSchool.Entities.Models.StaffCourse", b =>
                 {
-                    b.HasOne("HighSchool.Entities.Models.Student", null)
-                        .WithMany("ProgressReports")
-                        .HasForeignKey("StudentId");
-                });
+                    b.HasOne("HighSchool.Entities.Models.Course", "Course")
+                        .WithMany("StaffCourses")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("HighSchool.Entities.Models.Question", b =>
-                {
-                    b.HasOne("HighSchool.Entities.Models.Quiz", null)
-                        .WithMany("Questions")
-                        .HasForeignKey("QuizId");
-                });
+                    b.HasOne("HighSchool.Entities.Models.Staff", "Staff")
+                        .WithMany("StaffCourses")
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("HighSchool.Entities.Models.Staff", b =>
-                {
-                    b.HasOne("HighSchool.Entities.Models.Course", null)
-                        .WithMany("Teachers")
-                        .HasForeignKey("CourseId");
+                    b.Navigation("Course");
 
-                    b.HasOne("HighSchool.Entities.Models.EmployeeType", "EmployeeType")
-                        .WithMany()
-                        .HasForeignKey("EmployeeTypeId");
-
-                    b.Navigation("EmployeeType");
+                    b.Navigation("Staff");
                 });
 
             modelBuilder.Entity("HighSchool.Entities.Models.Student", b =>
@@ -1651,6 +1781,44 @@ namespace HighSchool.API.Migrations
                         .HasForeignKey("NextOfKinId");
 
                     b.Navigation("NextOfKin");
+                });
+
+            modelBuilder.Entity("HighSchool.Entities.Models.StudentGrade", b =>
+                {
+                    b.HasOne("HighSchool.Entities.Models.Grade", "Grade")
+                        .WithMany("StudentGrades")
+                        .HasForeignKey("GradeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HighSchool.Entities.Models.Student", "Student")
+                        .WithMany("StudentGrades")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Grade");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("HighSchool.Entities.Models.StudentGraduate", b =>
+                {
+                    b.HasOne("HighSchool.Entities.Models.Graduate", "Graduate")
+                        .WithMany("StudentGraduates")
+                        .HasForeignKey("GraduateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HighSchool.Entities.Models.Student", "Student")
+                        .WithMany("StudentGraduates")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Graduate");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1711,7 +1879,17 @@ namespace HighSchool.API.Migrations
 
             modelBuilder.Entity("HighSchool.Entities.Models.Course", b =>
                 {
-                    b.Navigation("Teachers");
+                    b.Navigation("StaffCourses");
+                });
+
+            modelBuilder.Entity("HighSchool.Entities.Models.Grade", b =>
+                {
+                    b.Navigation("StudentGrades");
+                });
+
+            modelBuilder.Entity("HighSchool.Entities.Models.Graduate", b =>
+                {
+                    b.Navigation("StudentGraduates");
                 });
 
             modelBuilder.Entity("HighSchool.Entities.Models.Invoice", b =>
@@ -1729,14 +1907,11 @@ namespace HighSchool.API.Migrations
                     b.Navigation("Answers");
                 });
 
-            modelBuilder.Entity("HighSchool.Entities.Models.Quiz", b =>
-                {
-                    b.Navigation("Questions");
-                });
-
             modelBuilder.Entity("HighSchool.Entities.Models.Staff", b =>
                 {
                     b.Navigation("LessonPlans");
+
+                    b.Navigation("StaffCourses");
                 });
 
             modelBuilder.Entity("HighSchool.Entities.Models.Student", b =>
@@ -1749,7 +1924,9 @@ namespace HighSchool.API.Migrations
 
                     b.Navigation("Notes");
 
-                    b.Navigation("ProgressReports");
+                    b.Navigation("StudentGrades");
+
+                    b.Navigation("StudentGraduates");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,7 +12,7 @@ namespace HighSchool.Entities.Models
         public string ?InvoiceTerms { get; set; }
         public DateTime? DueDate { get; set; }
         public ICollection<InvoiceItem> ?InvoiceItems { get; set; }
-        public Guid? StudentId { get; set; }
+        public Guid StudentId { get; set; }
         public Student? Student { get; set; }
     }
 }

@@ -199,6 +199,21 @@ namespace HighSchool.API.Controllers.API
             return NoContent();
         }
 
+        [HttpDelete("permanentDelete/{pageId}")]
+
+        public async Task<IActionResult> DeletePostPermanently(Guid pageId)
+        {
+            var pageEntity = await _repository.Page.GetPageByIdAsync(pageId, trackChanges: false);
+
+            if (pageEntity is null)
+                return NotFound($"Page with id {pageId} does not exist");
+
+            _repository.Page.PermanentDelete(pageEntity);
+            await _repository.SaveAsync();
+
+            return NoContent();
+        }
+
         [HttpPut("publish/{pageId}")]
         public async Task<IActionResult> PublishPost(Guid pageId)
         {

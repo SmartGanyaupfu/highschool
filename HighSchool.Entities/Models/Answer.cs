@@ -9,7 +9,7 @@ namespace HighSchool.Entities.Models
         public string? Explantion{ get; set; }
 
         public Question? Question { get; set; }
-        public int? QuestionId { get; set; }
+        public int QuestionId { get; set; }
     }
 }
 
