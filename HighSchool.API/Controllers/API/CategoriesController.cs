@@ -75,7 +75,8 @@ namespace HighSchool.API.Controllers.API
 
             if (categoryFromDb != null)
             {
-                category.Slug += "-copy";
+                Guid g = Guid.NewGuid();
+                category.Slug += g + "-copy";
             }
             category.AuthorId = User.GetUserId();
 
@@ -97,7 +98,8 @@ namespace HighSchool.API.Controllers.API
 
             if (categoryFromDb != null && categoryFromDb.CategoryId !=categoryId )
             {
-                category.Slug += "-copy";
+                Guid g = Guid.NewGuid();
+                category.Slug += g + "-copy";
             }
             category.AuthorId = User.GetUserId();
 

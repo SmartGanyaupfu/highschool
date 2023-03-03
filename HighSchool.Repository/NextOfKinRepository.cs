@@ -13,10 +13,11 @@ namespace HighSchool.Repository
 
         }
 
-        public void CreateNextOfKinAsync(NextOfKin nextOfKin)
+        public void CreateNextOfKinAsync(Guid studentId,NextOfKin nextOfKin)
         {
             nextOfKin.Published = true;
             nextOfKin.DatePublished = DateTime.Now;
+            nextOfKin.StudentId = studentId;
             Create(nextOfKin);
         }
 
@@ -27,9 +28,9 @@ namespace HighSchool.Repository
             return PagedList<NextOfKin>.ToPagedList(nextOfKins, requestParameters.PageNumber, requestParameters.PageSize);
         }
 
-        public async Task<NextOfKin> GetNextOfKinByIdAsync(int nextOfKinId, bool trackChanges)
+        public async Task<NextOfKin> GetNextOfKinByIdAsync(Guid studentId,int nextOfKinId, bool trackChanges)
         {
-            return await FindByCondition(p => p.NextOfKinId.Equals(nextOfKinId) && p.Deleted == false, trackChanges).SingleOrDefaultAsync();
+            return await FindByCondition(p => p.NextOfKinId.Equals(nextOfKinId) && p.Deleted == false&& p.StudentId.Equals(studentId), trackChanges).SingleOrDefaultAsync();
         }
 
         public void MoveToTrash(NextOfKin nextOfKin)

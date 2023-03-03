@@ -3,6 +3,10 @@ namespace HighSchool.Entities.Models
 {
     public class AllocatedResource:BaseEntity
     {
+        public AllocatedResource()
+        {
+            DateCreated = DateTime.Now;
+        }
         public int AllocatedResourceId { get; set; }
         public string? Title { get; set; }
         public string? Details { get; set; }

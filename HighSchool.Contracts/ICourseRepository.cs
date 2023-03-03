@@ -6,8 +6,8 @@ namespace HighSchool.Contracts
 {
     public interface ICourseRepository
     {
-        Task<PagedList<CourseMV>> GetAllCourseAsync(RequestParameters requestParameters, bool trackChanges);
-        Task<CourseMV> GetCourseByIdAsync(int courseId, bool trackChanges);
+        Task<PagedList<CourseMV>> GetAllCoursesAsync(RequestParameters requestParameters, bool trackChanges);
+        Task<CourseMV> GetCourseByIdAsync(Guid courseId, bool trackChanges);
         Task<CourseMV> GetCourseBySlugAsync(string slug, bool trackChanges);
         void CreateCourseAsync(Course course);
         void MoveToTrash(Course course);

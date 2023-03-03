@@ -21,7 +21,7 @@ namespace HighSchool.Repository
 
         public async Task<IEnumerable<AllocatedResource>> GetAllAllocatedResourcesForStudentAsync(Guid studentId, bool trackChanges)
         {
-            return await FindByCondition(r => r.StudentId.Equals(studentId) && r.Deleted.Equals(false), trackChanges).OrderBy(r=>r.DateCreated).ToListAsync();
+            return await FindByCondition(r => r.StudentId.Equals(studentId) && r.Deleted.Equals(false) , trackChanges).OrderBy(r=>r.DateCreated).ToListAsync();
         }
 
         public async Task<AllocatedResource> GetAllocatedResourceByIdAsync(Guid studentId, int resourceId, bool trackChanges)

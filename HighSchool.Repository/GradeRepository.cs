@@ -6,29 +6,40 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HighSchool.Repository
 {
-    public class HClassRepository : GenericRepositoryBase<Grade>, IGradeRepository
+    public class GradeRepository : GenericRepositoryBase<Grade>, IGradeRepository
     {
-        public HClassRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        public GradeRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
 
         }
 
-        public void CreateClassAsync(Guid staffId, Grade grade)
+        public void CreateGradeAsync(Guid staffId, Grade grade)
         {
             grade.StaffId = staffId;
             Create(grade);
         }
 
-        public async Task<Grade> GetClassByIdAsync(int gradeId, bool trackChanges)
+        public async Task<GradeMV> GetGradeByIdAsync(int gradeId, bool trackChanges)
         {
-            return await FindByCondition(c => c.GradeId.Equals(gradeId), trackChanges).SingleOrDefaultAsync();
+            return await FindByCondition(c => c.GradeId.Equals(gradeId), trackChanges)
+                .Select(g => new GradeMV()
+                {
+                    Grade = g,
+                    Students= g.StudentGrades.Select(g => g.Student).ToList()
+                })
+                .SingleOrDefaultAsync();
         }
 
-        public async Task<PagedList<Grade>> GetClassesAsync(RequestParameters requestParameters, bool trackChanges)
+        public async Task<PagedList<GradeMV>> GetGradesAsync(RequestParameters requestParameters, bool trackChanges)
         {
-            var classes = await FindAll(trackChanges).ToListAsync();
+            var classes = await FindAll(trackChanges)
+                 .Select(g => new GradeMV()
+                 {
+                     Grade = g,
+                     Students = g.StudentGrades.Select(g => g.Student).ToList()
+                 }).ToListAsync();
 
-            return PagedList<Grade>.ToPagedList(classes, requestParameters.PageNumber, requestParameters.PageNumber);
+            return PagedList<GradeMV>.ToPagedList(classes, requestParameters.PageNumber, requestParameters.PageNumber);
         }
 
         public void MoveToTrash(Grade grade)
@@ -38,7 +49,7 @@ namespace HighSchool.Repository
             Update(grade);
         }
 
-        public void UpdateClassAsync(Grade grade)
+        public void UpdateGradeAsync(Grade grade)
         {
             Update(grade);
         }

@@ -21,7 +21,7 @@ namespace HighSchool.Repository
 
         public async Task<Note> GetNoteByIdAsync(Guid studentId, int noteId, bool trackChanges)
         {
-            return await FindByCondition(n => n.StudentId.Equals(studentId) && n.Deleted.Equals(false), trackChanges).FirstOrDefaultAsync();
+            return await FindByCondition(n => n.StudentId.Equals(studentId) && n.Deleted.Equals(false)&& n.NoteId==noteId, trackChanges).FirstOrDefaultAsync();
         }
 
         public async Task<PagedList<Note>> GetNotesForStudentAsync(Guid studentId, RequestParameters requestParameters, bool trackChanges)

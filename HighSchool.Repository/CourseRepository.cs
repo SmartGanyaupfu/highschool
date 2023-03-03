@@ -20,7 +20,7 @@ namespace HighSchool.Repository
             Create(course);
         }
 
-        public async Task<PagedList<CourseMV>> GetAllCourseAsync(RequestParameters requestParameters, bool trackChanges)
+        public async Task<PagedList<CourseMV>> GetAllCoursesAsync(RequestParameters requestParameters, bool trackChanges)
         {
             var courses = await FindByCondition(s => s.Deleted.Equals(false), trackChanges).OrderByDescending(p => p.DateCreated).Select(
                 c => new CourseMV()
@@ -33,7 +33,7 @@ namespace HighSchool.Repository
             return PagedList<CourseMV>.ToPagedList(courses, requestParameters.PageNumber, requestParameters.PageSize);
         }
 
-        public async Task<CourseMV> GetCourseByIdAsync(int courseId, bool trackChanges)
+        public async Task<CourseMV> GetCourseByIdAsync(Guid courseId, bool trackChanges)
         {
             return await FindByCondition(p => p.CourseId.Equals(courseId) && p.Deleted == false, trackChanges).Select(
                 c => new CourseMV()

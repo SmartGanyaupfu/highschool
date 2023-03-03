@@ -1,7 +1,7 @@
 ﻿using System;
 namespace HighSchool.Entities.Models
 {
-    public class Graduate
+    public class Graduate:BaseEntity
     {
         
         public int GraduateId { get; set; }

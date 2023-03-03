@@ -9,6 +9,7 @@ namespace HighSchool.Entities.Models
         public string? MaritalStatus { get; set; }
        
         public int EmployeeTypeId { get; set; }
+        public EmployeeType? EmployeeType { get; set; }
         public ICollection<LessonPlan>? LessonPlans { get; set; }
         public ICollection<StaffCourse>? StaffCourses { get; set; }
 

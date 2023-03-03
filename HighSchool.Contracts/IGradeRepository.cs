@@ -6,11 +6,11 @@ namespace HighSchool.Contracts
 {
     public interface IGradeRepository
     {
-        Task<PagedList<Grade>> GetClassesAsync(RequestParameters requestParameters, bool trackChanges);
-        Task<Grade> GetClassByIdAsync( int gradeId, bool trackChanges);
-        void CreateClassAsync(Guid staffId, Grade grade);
+        Task<PagedList<GradeMV>> GetGradesAsync(RequestParameters requestParameters, bool trackChanges);
+        Task<GradeMV> GetGradeByIdAsync( int gradeId, bool trackChanges);
+        void CreateGradeAsync(Guid staffId, Grade grade);
         void MoveToTrash(Grade grade);
-        void UpdateClassAsync(Grade grade);
+        void UpdateGradeAsync(Grade grade);
     }
 }
 

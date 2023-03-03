@@ -29,6 +29,8 @@ namespace HighSchool.Contracts
         IStaffCourseRepository StaffCourse { get; }
         IStudentGradeRepository StudentGrade { get; }
         IStudentGraduateRepository StudentGraduate { get; }
+        IGraduateRepository Graduate { get; }
+        
     }
 }
 

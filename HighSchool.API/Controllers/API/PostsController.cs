@@ -137,21 +137,25 @@ namespace HighSchool.API.Controllers.API
             _repository.Post.CreatePostAsync(postEntity);
             await _repository.SaveAsync();
 
-            foreach( var categoryId in post.CategoryIds)
+            if (post.CategoryIds !=null)
             {
-                var postCat = new PostCat()
-                {
-                    PostId = postEntity.PostId,
-                    CategoryId = categoryId
-                };
-                _repository.PostCat.CreatePostCatAsync(postCat);
-                await _repository.SaveAsync();
 
+                foreach (var categoryId in post.CategoryIds)
+                {
+                    var postCat = new PostCat()
+                    {
+                        PostId = postEntity.PostId,
+                        CategoryId = categoryId
+                    };
+                    _repository.PostCat.CreatePostCatAsync(postCat);
+                    await _repository.SaveAsync();
+
+                }
             }
             var postToReturn = _mapper.Map<PostDto>(postEntity);
 
             var postFromDb = await _repository.Post.GetPostByIdAsync(postToReturn.PostId, trackChanges: false);
-            if (post is null)
+            if (postFromDb is null)
                 return NotFound("Post created,but could not be found.");
 
             Image image;
@@ -208,7 +212,7 @@ namespace HighSchool.API.Controllers.API
           _mapper.Map(post, postEntity.Post);
 
           await _repository.SaveAsync();
-            if (post.CategoryIds.Count > 0)
+            if (post.CategoryIds !=null)
             {
                 var postCats = await _repository.PostCat.GetAllPostsAsync(postEntity.Post.PostId, trackChanges: false);
 
@@ -232,6 +236,8 @@ namespace HighSchool.API.Controllers.API
                     await _repository.SaveAsync();
                 }
             }
+
+
             return NoContent();
       }
         //[Authorize]

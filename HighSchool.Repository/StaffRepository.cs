@@ -34,6 +34,17 @@ namespace HighSchool.Repository
 
         }
 
+        public async Task<TeacherMV> GetStaffNationalIdAsync(string natId, bool trackChanges)
+        {
+            return await FindByCondition(p => p.NationalIdentityNumber.Equals(natId), trackChanges).Select(
+                s => new TeacherMV()
+                {
+                    Staff = s,
+                    Courses = s.StaffCourses.Select(c => c.Course).ToList()
+                }
+                ).SingleOrDefaultAsync();
+        }
+
         public async Task<TeacherMV> GetTeacherByIdAsync(Guid staffId, bool trackChanges)
         {
             return await FindByCondition(p => p.StaffId.Equals(staffId) && p.Deleted == false, trackChanges).Select(
