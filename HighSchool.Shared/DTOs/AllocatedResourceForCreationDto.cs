@@ -5,6 +5,7 @@ namespace HighSchool.Shared.DTOs
     {
         public AllocatedResourceForCreationDto()
         {
+            DateCreated = DateTime.Now;
         }
         public string? Title { get; set; }
         public string? Details { get; set; }

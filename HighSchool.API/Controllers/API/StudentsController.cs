@@ -143,7 +143,7 @@ namespace HighSchool.API.Controllers.API
 
             Image image;
             //Gallery gallery;
-            var studentFromDbToReturn = _mapper.Map<PostMVDto>(studentFromDb);
+            var studentFromDbToReturn = _mapper.Map<StudentMVDto>(studentFromDb);
 
             /*if (postFromDb.Post.FeatureImageId != null)
             {

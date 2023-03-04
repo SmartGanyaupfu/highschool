@@ -3,6 +3,10 @@ namespace HighSchool.Shared.DTOs
 {
     public class PageForCreationDto:BaseEntityDto
     {
+        public PageForCreationDto()
+        {
+            DateCreated = DateTime.Now;
+        }
         public string? Title { get; set; }
         public string? Content { get; set; }
         public string? Excerpt { get; set; }

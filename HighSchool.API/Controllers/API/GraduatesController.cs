@@ -42,9 +42,9 @@ namespace HighSchool.API.Controllers.API
 
         // GET api/values/5
         [HttpGet("{graduateId}", Name = "graduatesId")]
-        public async Task<IActionResult> GetGradeById(int gradeId)
+        public async Task<IActionResult> GetGraduateById(int graduateId)
         {
-            var graduate = await _repository.Graduate.GetGraduateByIdAsync(gradeId, trackChanges: false);
+            var graduate = await _repository.Graduate.GetGraduateByIdAsync(graduateId, trackChanges: false);
             if (graduate is null)
                 return NotFound();
 
@@ -71,12 +71,12 @@ namespace HighSchool.API.Controllers.API
             await _repository.SaveAsync();
 
 
-            var graduateFromDb = await _repository.Grade.GetGradeByIdAsync(graduateEntity.GraduateId, trackChanges: false);
+            var graduateFromDb = await _repository.Graduate.GetGraduateByIdAsync(graduateEntity.GraduateId, trackChanges: false);
             if (graduateFromDb is null)
                 return NotFound("Graduate created,but could not be be retrieved.");
 
 
-            var graduateFromDbToReturn = _mapper.Map<GradeMVDto>(graduateFromDb);
+            var graduateFromDbToReturn = _mapper.Map<GraduateMVDto>(graduateFromDb);
 
             return Ok(graduateFromDbToReturn);
         }
@@ -84,7 +84,7 @@ namespace HighSchool.API.Controllers.API
         //[Authorize]
         [HttpPut("{graduateId}")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> UpdateGradeById(int graduateId, [FromBody] GraduateForUpdateDto graduate)
+        public async Task<IActionResult> UpdateGraduateById(int graduateId, [FromBody] GraduateForUpdateDto graduate)
         {
             var graduateFromDb = await _repository.Graduate.GetGraduateByIdAsync(graduateId, trackChanges: true);
 
@@ -104,7 +104,7 @@ namespace HighSchool.API.Controllers.API
         }
         //[Authorize]
         [HttpDelete("{graduateId}")]
-        public async Task<IActionResult> MoveGradeToTrash(int graduateId)
+        public async Task<IActionResult> MoveGraduateToTrash(int graduateId)
         {
 
 

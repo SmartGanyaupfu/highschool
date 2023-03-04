@@ -171,7 +171,7 @@ namespace HighSchool.API.Controllers.API
         return NoContent();
     }
 
-    [HttpDelete("permanentDelete/{studentId}")]
+    [HttpDelete("permanentDelete/{courseId}")]
 
     public async Task<IActionResult> DeleteCoursePermanently(Guid courseId)
     {

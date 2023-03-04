@@ -7,7 +7,7 @@ namespace HighSchool.Entities.Models
 
         //public int? CategoryId { get; set; }
 
-        public ICollection<Staff>? Teachers { get; set; }
+        public ICollection<Staff>? Staff { get; set; }
     }
 }
 

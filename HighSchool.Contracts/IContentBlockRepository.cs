@@ -6,7 +6,7 @@ namespace HighSchool.Contracts
 {
     public interface IContentBlockRepository
     {
-        Task<PagedList<ContentBlock>> GetAllStaffAsync(RequestParameters requestParameters, bool trackChanges);
+        Task<PagedList<ContentBlock>> GetAllBlocksAsync(RequestParameters requestParameters, bool trackChanges);
         Task<ContentBlock> GetContentBlockByIdAsync(int contentBlockId, bool trackChanges);
         void CreateContentBlockAsync(ContentBlock contentBlock);
         void MoveToTrash(ContentBlock contentBlock);

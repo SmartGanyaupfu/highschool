@@ -39,7 +39,7 @@ namespace HighSchool.Repository
                      Students = g.StudentGrades.Select(g => g.Student).ToList()
                  }).ToListAsync();
 
-            return PagedList<GradeMV>.ToPagedList(classes, requestParameters.PageNumber, requestParameters.PageNumber);
+            return PagedList<GradeMV>.ToPagedList(classes, requestParameters.PageNumber, requestParameters.PageSize);
         }
 
         public void MoveToTrash(Grade grade)

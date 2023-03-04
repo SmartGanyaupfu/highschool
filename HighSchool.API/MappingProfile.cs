@@ -59,6 +59,7 @@ namespace HighSchool.API
             CreateMap<GradeForUpdateDto, Grade>();
 
             CreateMap<Graduate, GraduateDto>();
+            CreateMap<GraduateMV, GraduateMVDto>();
             CreateMap<GraduateForCreationDto, Graduate>();
             CreateMap<GraduateForUpdateDto, Graduate>();
 
@@ -77,6 +78,16 @@ namespace HighSchool.API
             CreateMap<NextOfKin, NextOfKinDto>();
             CreateMap<NextOfKinForCreationDto, NextOfKin>();
             CreateMap<NextOfKinForUpdateDto, NextOfKin>();
+
+            CreateMap<Note, NoteDto>();
+            CreateMap<NoteForCreationDto,Note>();
+            CreateMap<NoteForUpdateDto, Note>();
+
+            CreateMap<WidgetForCreationDto, Widget>();
+            CreateMap<WidgetForUpdateDto, Widget>();
+
+            CreateMap<ContentBlockForCreationDto, ContentBlock>();
+            CreateMap<ContentBlockForUpdateDto, ContentBlock>();
 
             CreateMap<Image, ImageDto>();
         }

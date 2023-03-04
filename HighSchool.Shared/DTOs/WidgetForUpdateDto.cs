@@ -1,10 +1,9 @@
 ﻿using System;
-namespace HighSchool.Entities.Models
+namespace HighSchool.Shared.DTOs
 {
-    public class Widget:BaseEntity
+    public class WidgetForUpdateDto
     {
-        public int WidgetId { get; set; }
-        public string? MissionStatemnetBlockId{ get; set; }
+        public string? MissionStatemnetBlockId { get; set; }
         public string? VissionBlockId { get; set; }
         public string? ValuesBlockId { get; set; }
         public string? LogoUrl { get; set; }

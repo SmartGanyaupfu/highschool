@@ -40,7 +40,7 @@ namespace HighSchool.Repository
 
         public async Task<StudentMV> GetStudentByIdAsync(Guid studentId, bool trackChanges)
         {
-            return await FindByCondition(p => p.StudentId.Equals(studentId) && p.Deleted == false, trackChanges)
+            return await FindByCondition(p => p.StudentId.Equals(studentId) && p.Deleted == false, trackChanges).Include(n=>n.NextOfKin).Include(n=>n.Notes)
 
             .OrderByDescending(s => s.DateCreated).Select(s => new StudentMV()
             {

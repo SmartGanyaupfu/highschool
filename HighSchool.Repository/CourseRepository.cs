@@ -26,7 +26,7 @@ namespace HighSchool.Repository
                 c => new CourseMV()
                 {
                     Course = c,
-                    Teachers = c.StaffCourses.Select(sc => sc.Staff).ToList()
+                    Staff = c.StaffCourses.Select(sc => sc.Staff).ToList()
                 }
                 ).ToListAsync();
 
@@ -39,7 +39,7 @@ namespace HighSchool.Repository
                 c => new CourseMV()
                 {
                     Course = c,
-                    Teachers = c.StaffCourses.Select(sc => sc.Staff).ToList()
+                    Staff = c.StaffCourses.Select(sc => sc.Staff).ToList()
                 }
                 ).SingleOrDefaultAsync();
         }
@@ -50,7 +50,7 @@ namespace HighSchool.Repository
                 c => new CourseMV()
                 {
                     Course = c,
-                    Teachers = c.StaffCourses.Select(sc => sc.Staff).ToList()
+                    Staff = c.StaffCourses.Select(sc => sc.Staff).ToList()
                 }
                 ).SingleOrDefaultAsync();
         }

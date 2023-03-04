@@ -37,7 +37,7 @@ namespace HighSchool.API.Controllers.API
         }
 
         // GET api/values/5
-        [HttpGet("{stffId}", Name = "staffsId")]
+        [HttpGet("{staffId}", Name = "staffsId")]
         public async Task<IActionResult> GetStaffById(Guid staffId)
         {
             var staff = await _repository.Staff.GetTeacherByIdAsync(staffId, trackChanges: false);
@@ -60,32 +60,7 @@ namespace HighSchool.API.Controllers.API
 
             return Ok(staffToReturn);
         }
-        /*[HttpGet("slug/{postSlug}")]
-        public async Task<IActionResult> GetPostBySlug(string postSlug)
-        {
-            var post = await _repository.Post.GetPostBySlugNameAsync(postSlug, trackChanges: false);
-            if (post is null)
-                return NotFound();
-
-            Image image;
-
-            //Gallery gallery;
-            var postToReturn = _mapper.Map<PostMVDto>(post);
-
-            if (post.Post.FeatureImageId != null)
-            {
-                image = await _repository.Image.GetImageByIdAsync((int)post.Post.FeatureImageId, trackChanges: false);
-                postToReturn.Post.Image = _mapper.Map<ImageDto>(image);
-            }
-            /*  if (post.SgGalleryId != null)
-           {
-               gallery = await _repository.Gallery.GetGalleryByIdAsync((int)post.SgGalleryId, trackChanges: false);
-               postToReturn.Gallery = _mapper.Map<GalleryDto>(gallery);
-           }
-           var pageToReturn = _mapper.Map<PostDto>(post);*/
-        /* return Ok(postToReturn);
-     }
- */
+    
 
         //[Authorize]
         [HttpPost]
@@ -134,12 +109,12 @@ namespace HighSchool.API.Controllers.API
            
 
             var staffEntityFromDb = await _repository.Staff.GetTeacherByIdAsync(staffEntity.StaffId, trackChanges: false);
-            if (staffFromDb is null)
+            if (staffEntityFromDb is null)
                 return NotFound("Staff created,but could not be be retrieved.");
 
             Image image;
             //Gallery gallery;
-            var staffFromDbToReturn = _mapper.Map<PostMVDto>(staffEntityFromDb);
+            var staffFromDbToReturn = _mapper.Map<TeacherMVDto>(staffEntityFromDb);
 
             /*if (postFromDb.Post.FeatureImageId != null)
             {
@@ -151,25 +126,7 @@ namespace HighSchool.API.Controllers.API
             //var votesToReturn = await _serviceManager.QualificationService.CreateQualificationForStudyOptionAsync(studyOptionId, qualification, trackChanges: false);
             return Ok(staffEntityFromDb);
         }
-        /* [Authorize]
-      [HttpPost("{postId}/add-block")]
-      public async Task<IActionResult> AddBlock([FromBody] ContentBlockForCreationDto contentBlock, Guid postId)
-      {
-          var postEntity = await _repository.Post.GetPostByIdAsync(postId, trackChanges: false);
-          if (postEntity is null)
-              return NotFound($"Post with id {postId} does not exist.");
-
-          var blockEntity = _mapper.Map<ContentBlock>(contentBlock);
-          _repository.ContentBlock.CreateContentBlockAsync(blockEntity);
-
-          await _repository.SaveAsync();
-
-          var postToReturn = _mapper.Map<PostDto>(postEntity);
-
-
-          return CreatedAtRoute("postsId", new { postId = postToReturn.PostId }, postToReturn);
-      }
-        */
+      
         //[Authorize]
         [HttpPut("{staffId}")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]

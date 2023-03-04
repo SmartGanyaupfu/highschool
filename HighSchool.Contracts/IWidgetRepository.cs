@@ -7,7 +7,7 @@ namespace HighSchool.Contracts
     {
         Task<Widget> GetWidgetAsync( bool trackChanges);
         void CreateWidgetAsync(Widget widget);
-        
+        Task<Widget> GetWidgetByIdAsync(int widgetId,bool trackChanges);
         void UpdateWidgetAsync(Widget widget);
     }
 }

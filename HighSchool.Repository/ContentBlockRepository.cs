@@ -20,7 +20,7 @@ namespace HighSchool.Repository
             Create(contentBlock);
         }
 
-        public async Task<PagedList<ContentBlock>> GetAllStaffAsync(RequestParameters requestParameters, bool trackChanges)
+        public async Task<PagedList<ContentBlock>> GetAllBlocksAsync(RequestParameters requestParameters, bool trackChanges)
         {
             var contentBlocks = await FindByCondition(s => s.Deleted.Equals(false), trackChanges).OrderByDescending(p => p.DateCreated).ToListAsync();
 

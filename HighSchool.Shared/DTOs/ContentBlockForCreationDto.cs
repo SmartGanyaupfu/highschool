@@ -1,13 +1,12 @@
 ﻿using System;
 namespace HighSchool.Shared.DTOs
 {
-    public class NoteForCreationDto:BaseEntityDto
+    public class ContentBlockForCreationDto:BaseEntityDto
     {
-        public NoteForCreationDto()
+        public ContentBlockForCreationDto()
         {
             DateCreated = DateTime.Now;
         }
-     
         public string? Title { get; set; }
         public string? Content { get; set; }
     }

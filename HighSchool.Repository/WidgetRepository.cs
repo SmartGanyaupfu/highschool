@@ -24,6 +24,13 @@ namespace HighSchool.Repository
             return (widgets.FirstOrDefault());
         }
 
+        public async Task<Widget> GetWidgetByIdAsync(int widgetId, bool trackChanges)
+        {
+            return await FindByCondition(w=>w.WidgetId.Equals(widgetId),trackChanges).SingleOrDefaultAsync();
+
+           
+        }
+
         public void UpdateWidgetAsync(Widget widget)
         {
             Update(widget);
