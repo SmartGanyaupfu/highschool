@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using HighSchool.API.ActionFilters;
 using HighSchool.API.Extensions;
+using HighSchool.API.Migrations;
 using HighSchool.Contracts;
 using HighSchool.Entities.Models;
 using HighSchool.Shared.DTOs;
@@ -34,7 +35,7 @@ namespace HighSchool.API.Controllers.API
         {
 
             var students = await _repository.Student.GetAllStudentsAsync(requestParameters, trackChanges: false);
-            var studentsToReturn = _mapper.Map<IEnumerable< StudentMVDto>>(students);
+            var studentsToReturn = _mapper.Map<IEnumerable< StudentDto>>(students);
 
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(students.MetaData));
           
@@ -49,7 +50,7 @@ namespace HighSchool.API.Controllers.API
             if (student is null)
                 return NotFound();
 
-            var studentToReturn = _mapper.Map<StudentMVDto>(student);
+            var studentToReturn = _mapper.Map<StudentDto>(student);
             /* Image image;
              //Gallery gallery;
 
@@ -109,51 +110,53 @@ namespace HighSchool.API.Controllers.API
             var studentEntity = _mapper.Map<Student>(student);
             _repository.Student.CreateStudentAsync(studentEntity);
             await _repository.SaveAsync();
-            if (student.GradesIds != null) { 
-            foreach (var gradeId in student.GradesIds)
-            {
-                var studentGrade = new StudentGrade()
-                {
-                    StudentId = studentEntity.StudentId,
-                    GradeId = gradeId
-                };
-                _repository.StudentGrade.CreateAsync(studentGrade);
-                await _repository.SaveAsync();
+            var studentToReturn = _mapper.Map<StudentDto>(studentEntity);
+            /* if (student.GradesIds != null) { 
+             foreach (var gradeId in student.GradesIds)
+             {
+                 var studentGrade = new StudentGrade()
+                 {
+                     StudentId = studentEntity.StudentId,
+                     GradeId = gradeId
+                 };
+                 _repository.StudentGrade.CreateAsync(studentGrade);
+                 await _repository.SaveAsync();
 
-            }
-            }
-            if (student.GraduateIds !=null)
-            {
-                foreach (var graduateId in student.GraduateIds)
-                {
-                    var studentGraduate = new StudentGraduate()
-                    {
-                        StudentId = studentEntity.StudentId,
-                        GraduateId = graduateId
-                    };
-                    _repository.StudentGraduate.CreateAsync(studentGraduate);
-                    await _repository.SaveAsync();
-                }
-            }
-            
+             }
+             }
+             if (student.GraduateIds !=null)
+             {
+                 foreach (var graduateId in student.GraduateIds)
+                 {
+                     var studentGraduate = new StudentGraduate()
+                     {
+                         StudentId = studentEntity.StudentId,
+                         GraduateId = graduateId
+                     };
+                     _repository.StudentGraduate.CreateAsync(studentGraduate);
+                     await _repository.SaveAsync();
+                 }
+             }
 
-            var studentFromDb = await _repository.Student.GetStudentByIdAsync(studentEntity.StudentId, trackChanges: false);
-            if (studentFromDb is null)
-                return NotFound("Student created,but could not be be retrieved.");
 
-            Image image;
-            //Gallery gallery;
-            var studentFromDbToReturn = _mapper.Map<StudentMVDto>(studentFromDb);
+             var studentFromDb = await _repository.Student.GetStudentByIdAsync(studentEntity.StudentId, trackChanges: false);
+             if (studentFromDb is null)
+                 return NotFound("Student created,but could not be be retrieved.");
 
-            /*if (postFromDb.Post.FeatureImageId != null)
-            {
-                image = await _repository.Image.GetImageByIdAsync((int)postFromDb.Post.FeatureImageId, trackChanges: false);
-                postFromDbToReturn.Post.Image = _mapper.Map<ImageDto>(image);
-            }
-            */
+             Image image;
+             //Gallery gallery;
+             var studentFromDbToReturn = _mapper.Map<StudentDto>(studentFromDb);
+
+             /*if (postFromDb.Post.FeatureImageId != null)
+             {
+                 image = await _repository.Image.GetImageByIdAsync((int)postFromDb.Post.FeatureImageId, trackChanges: false);
+                 postFromDbToReturn.Post.Image = _mapper.Map<ImageDto>(image);
+             }
+             */
 
             //var votesToReturn = await _serviceManager.QualificationService.CreateQualificationForStudyOptionAsync(studyOptionId, qualification, trackChanges: false);
-            return Ok(studentFromDbToReturn);
+            // return Ok(studentFromDbToReturn);
+            return CreatedAtRoute("studentsId", new { studentId = studentToReturn.StudentId }, studentToReturn);
         }
         /* [Authorize]
       [HttpPost("{postId}/add-block")]
@@ -189,12 +192,12 @@ namespace HighSchool.API.Controllers.API
 
           
 
-            _mapper.Map(student, studentFromDb.Student);
+            _mapper.Map(student, studentFromDb);
 
             await _repository.SaveAsync();
-            if (student.GradesIds !=null)
+           /* if (student.GradesIds !=null)
             {
-                var studentGrades = await _repository.StudentGrade.GetAllStudentGradesByStudentIdAsync(studentFromDb.Student.StudentId, trackChanges: false);
+                var studentGrades = await _repository.StudentGrade.GetAllStudentGradesByStudentIdAsync(studentFromDb.StudentId, trackChanges: false);
 
                 //delete the sudent grades before adding new ones
 
@@ -219,7 +222,7 @@ namespace HighSchool.API.Controllers.API
 
             if (student.GraduateIds !=null)
             {
-                var studentGraduates = await _repository.StudentGraduate.GetAllStudentGraduatesByStudentIdAsync(studentFromDb.Student.StudentId, trackChanges: false);
+                var studentGraduates = await _repository.StudentGraduate.GetAllStudentGraduatesByStudentIdAsync(studentFromDb.StudentId, trackChanges: false);
 
                 //delete the sudent grades before adding new ones
 
@@ -240,7 +243,7 @@ namespace HighSchool.API.Controllers.API
                     _repository.StudentGraduate.CreateAsync(studentGraduate);
                     await _repository.SaveAsync();
                 }
-            }
+            }*/
             return NoContent();
         }
         //[Authorize]
@@ -254,7 +257,7 @@ namespace HighSchool.API.Controllers.API
                 return NotFound($"Student with id {studentId} does not exist");
 
 
-            _repository.Student.MoveToTrash(studentEntity.Student);
+            _repository.Student.MoveToTrash(studentEntity);
 
             await _repository.SaveAsync();
 
@@ -283,7 +286,7 @@ namespace HighSchool.API.Controllers.API
             if (studentEntity is null)
                 return NotFound($"Student with id {studentId} does not exist");
 
-            _repository.Student.Publish(studentEntity.Student);
+            _repository.Student.Publish(studentEntity);
 
             await _repository.SaveAsync();
 
@@ -297,7 +300,7 @@ namespace HighSchool.API.Controllers.API
             if (studentEntity is null)
                 return NotFound($"Student with id {studentId} does not exist");
 
-            _repository.Student.SetToDraft(studentEntity.Student);
+            _repository.Student.SetToDraft(studentEntity);
 
             await _repository.SaveAsync();
 

@@ -33,7 +33,7 @@ namespace HighSchool.API.Controllers.API
         {
 
             var graduates = await _repository.Graduate.GetGraduatesAsync(requestParameters, trackChanges: false);
-            var graduatesToReturn = _mapper.Map<IEnumerable<GraduateMVDto>>(graduates);
+            var graduatesToReturn = _mapper.Map<IEnumerable<GraduateDto>>(graduates);
 
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(graduates.MetaData));
 
@@ -48,7 +48,7 @@ namespace HighSchool.API.Controllers.API
             if (graduate is null)
                 return NotFound();
 
-            var graduateToReturn = _mapper.Map<GraduateMVDto>(graduate);
+            var graduateToReturn = _mapper.Map<GraduateDto>(graduate);
 
 
 
@@ -76,7 +76,7 @@ namespace HighSchool.API.Controllers.API
                 return NotFound("Graduate created,but could not be be retrieved.");
 
 
-            var graduateFromDbToReturn = _mapper.Map<GraduateMVDto>(graduateFromDb);
+            var graduateFromDbToReturn = _mapper.Map<GraduateDto>(graduateFromDb);
 
             return Ok(graduateFromDbToReturn);
         }
@@ -96,7 +96,7 @@ namespace HighSchool.API.Controllers.API
 
 
 
-            _mapper.Map(graduate, graduateFromDb.Graduate);
+            _mapper.Map(graduate, graduateFromDb);
 
 
 
@@ -117,7 +117,7 @@ namespace HighSchool.API.Controllers.API
             }
 
 
-            _repository.Graduate.MoveToTrash(graduateFromDb.Graduate);
+            _repository.Graduate.MoveToTrash(graduateFromDb);
 
             await _repository.SaveAsync();
 

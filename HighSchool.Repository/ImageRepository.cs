@@ -1,6 +1,7 @@
 ﻿using System;
 using HighSchool.Contracts;
 using HighSchool.Entities.Models;
+using HighSchool.Shared.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
 
 namespace HighSchool.Repository
@@ -27,12 +28,12 @@ namespace HighSchool.Repository
             Delete(image);
         }
 
-      /*  public async Task<PagedList<Image>> GetAllImagesAsync(RequestParameters requestParameters, bool trackChanges)
+       public async Task<PagedList<Image>> GetAllImagesAsync(RequestParameters requestParameters, bool trackChanges)
         {
             var images = await FindAll(trackChanges).OrderByDescending(p => p.DateCreated).ToListAsync();
 
             return PagedList<Image>.ToPagedList(images, requestParameters.PageNumber, requestParameters.PageSize);
-        }*/
+        }
 
         public async Task<Image> GetImageByIdAsync(int imageId, bool trackChanges)
         {

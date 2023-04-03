@@ -12,21 +12,21 @@ namespace HighSchool.Repository
 
         }
 
-        public void CreateCourseWorkReportAsync(Guid studentId, int gradeId, CourseWorkReport courseWorkReport)
+        public void CreateCourseWorkReportAsync(Guid studentId, int studentClassId, CourseWorkReport courseWorkReport)
         {
             courseWorkReport.StudentId = studentId;
-            courseWorkReport.GradeId = gradeId;
+            courseWorkReport.StudentClassId = studentClassId;
             Create(courseWorkReport);
         }
 
-        public async Task<CourseWorkReport> GetCourseWorkReportsByClassIdAsync(Guid studentId, int gradeId,int courseWorkReportId, bool trackChanges)
+        public async Task<CourseWorkReport> GetCourseWorkReportsByClassIdAsync(Guid studentId, int studentClassId, int courseWorkReportId, bool trackChanges)
         {
-            return await FindByCondition(s => s.StudentId.Equals(studentId) && s.GradeId.Equals(gradeId) && s.CourseWorkReportId.Equals(courseWorkReportId), trackChanges).Include(c => c.Course).SingleOrDefaultAsync();
+            return await FindByCondition(s => s.StudentId.Equals(studentId) && s.StudentClassId.Equals(studentClassId) && s.CourseWorkReportId.Equals(courseWorkReportId), trackChanges).Include(c => c.Course).SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<CourseWorkReport>> GetAllCourseWorkReportsForStudentAsync(Guid studentId, int gradeId, bool trackChanges)
+        public async Task<IEnumerable<CourseWorkReport>> GetAllCourseWorkReportsForStudentAsync(Guid studentId, int studentClassId, bool trackChanges)
         {
-           return await FindByCondition(s => s.StudentId.Equals(studentId) && s.GradeId.Equals(gradeId), trackChanges).Include(c=>c.Course).ToListAsync();
+           return await FindByCondition(s => s.StudentId.Equals(studentId) && s.StudentClassId.Equals(studentClassId), trackChanges).Include(c=>c.Course).ToListAsync();
         }
 
         public void MoveToTrash(CourseWorkReport courseWorkReport)

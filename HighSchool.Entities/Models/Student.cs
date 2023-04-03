@@ -11,9 +11,10 @@ namespace HighSchool.Entities.Models
         public ICollection<Invoice> ? Invoices { get; set; }
         public ICollection<CourseWorkReport> ?CourseWorkReports { get; set; }
         public NextOfKin ? NextOfKin { get; set; }
+        
 
-        public ICollection<StudentGrade>? StudentGrades { get; set; }
-        public ICollection<StudentGraduate>? StudentGraduates { get; set; }
+        // public ICollection<StudentGrade>? StudentGrades { get; set; }
+        //public ICollection<StudentGraduate>? StudentGraduates { get; set; }
 
 
 

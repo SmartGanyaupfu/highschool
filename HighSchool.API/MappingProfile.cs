@@ -53,10 +53,10 @@ namespace HighSchool.API
             CreateMap<EmployeeTypeForCreationDto, EmployeeType>();
             CreateMap<EmployeeTypeForUpdateDto, EmployeeType>();
 
-            CreateMap<Grade, GradeDto>();
+            CreateMap<StudentClass, GradeDto>();
             CreateMap<GradeMV, GradeMVDto>();
-            CreateMap<GradeForCreationDto, Grade>();
-            CreateMap<GradeForUpdateDto, Grade>();
+            CreateMap<GradeForCreationDto, StudentClass>();
+            CreateMap<GradeForUpdateDto, StudentClass>();
 
             CreateMap<Graduate, GraduateDto>();
             CreateMap<GraduateMV, GraduateMVDto>();
@@ -90,6 +90,7 @@ namespace HighSchool.API
             CreateMap<ContentBlockForUpdateDto, ContentBlock>();
 
             CreateMap<Image, ImageDto>();
+            CreateMap<ImageForUpdateDto, Image>();
         }
     }
 }

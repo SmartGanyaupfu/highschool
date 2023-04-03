@@ -5,9 +5,9 @@ namespace HighSchool.Contracts
 {
     public interface ICourseWorkReportRepository
     {
-        Task<IEnumerable<CourseWorkReport>> GetAllCourseWorkReportsForStudentAsync(Guid studentId, int hClassId, bool trackChanges);
-        Task<CourseWorkReport> GetCourseWorkReportsByClassIdAsync(Guid studentId, int hClassId,int courseWorkReportId, bool trackChanges);
-        void CreateCourseWorkReportAsync(Guid studentId, int hClassId, CourseWorkReport courseWorkReport);
+        Task<IEnumerable<CourseWorkReport>> GetAllCourseWorkReportsForStudentAsync(Guid studentId, int studentClassId, bool trackChanges);
+        Task<CourseWorkReport> GetCourseWorkReportsByClassIdAsync(Guid studentId, int studentClassId,int courseWorkReportId, bool trackChanges);
+        void CreateCourseWorkReportAsync(Guid studentId, int studentClassId, CourseWorkReport courseWorkReport);
         void MoveToTrash(CourseWorkReport courseWorkReport);
         void UpdateResourceAsync(CourseWorkReport courseWorkReport);
     }

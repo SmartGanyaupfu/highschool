@@ -12,7 +12,8 @@ namespace HighSchool.Entities.Models
         public string? MetaKeyWords { get; set; }
         public string? Slug { get; set; }
         public int? FeatureImageId { get; set; }
-        public string? Level { get; set; }
+        public int? StudentLevelId { get; set; }
+        public StudentLevel? StuentLevel { get; set; }
         public string? Prerequisite { get; set; }
         public string? Curriculum { get; set; }
         public string? CareerOpportunites { get; set; }

@@ -1,9 +1,9 @@
 ﻿using System;
 namespace HighSchool.Entities.Models
 {
-    public class Grade:BaseEntity
+    public class StudentClass:BaseEntity
     {
-        public int GradeId { get; set; }
+        public int StudentClassId { get; set; }
         public string? Name { get; set; }
         public int StudentLevelId { get; set; }
         public StudentLevel? StudentLevel { get; set; }

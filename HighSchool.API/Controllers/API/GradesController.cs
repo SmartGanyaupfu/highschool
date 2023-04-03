@@ -33,7 +33,7 @@ namespace HighSchool.API.Controllers.API
         {
 
             var grades = await _repository.Grade.GetGradesAsync(requestParameters, trackChanges: false);
-            var gradesToReturn = _mapper.Map<IEnumerable<GradeMVDto>>(grades);
+            var gradesToReturn = _mapper.Map<IEnumerable<GradeDto>>(grades);
 
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(grades.MetaData));
 
@@ -48,7 +48,7 @@ namespace HighSchool.API.Controllers.API
             if (grade is null)
                 return NotFound();
 
-            var gradeToReturn = _mapper.Map<GradeMVDto>(grade);
+            var gradeToReturn = _mapper.Map<GradeDto>(grade);
           
 
 
@@ -66,17 +66,17 @@ namespace HighSchool.API.Controllers.API
 
             grade.AuthorId = User.GetUserId();
 
-            var gradeEntity = _mapper.Map<Grade>(grade);
-            _repository.Grade.CreateGradeAsync(grade.StaffId,gradeEntity);
+            var gradeEntity = _mapper.Map<StudentClass>(grade);
+            _repository.Grade.CreateGradeAsync(gradeEntity);
             await _repository.SaveAsync();
            
 
-            var gradeFromDb = await _repository.Grade.GetGradeByIdAsync(gradeEntity.GradeId, trackChanges: false);
+            var gradeFromDb = await _repository.Grade.GetGradeByIdAsync(gradeEntity.StudentClassId, trackChanges: false);
             if (gradeFromDb is null)
                 return NotFound("Grade created,but could not be be retrieved.");
 
            
-            var gradeFromDbToReturn = _mapper.Map<GradeMVDto>(gradeFromDb);
+            var gradeFromDbToReturn = _mapper.Map<GradeDto>(gradeFromDb);
 
             return Ok(gradeFromDbToReturn);
         }
@@ -96,7 +96,7 @@ namespace HighSchool.API.Controllers.API
 
 
 
-            _mapper.Map(grade, gradeFromDb.Grade);
+            _mapper.Map(grade, gradeFromDb);
 
        
            
@@ -117,7 +117,7 @@ namespace HighSchool.API.Controllers.API
             }
 
 
-            _repository.Grade.MoveToTrash(gradeFromDb.Grade);
+            _repository.Grade.MoveToTrash(gradeFromDb);
 
             await _repository.SaveAsync();
 

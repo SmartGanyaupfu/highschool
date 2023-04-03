@@ -56,7 +56,7 @@ namespace HighSchool.Repository
                 .HasForeignKey(pt => pt.CourseId)
             .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<StudentGrade>()
+            /*modelBuilder.Entity<StudentGrade>()
       .HasKey(t => new { t.StudentId, t.GradeId });
 
             modelBuilder.Entity<StudentGrade>()
@@ -86,7 +86,7 @@ namespace HighSchool.Repository
                 .HasOne(pt => pt.Graduate)
                 .WithMany(t => t.StudentGraduates)
                 .HasForeignKey(pt => pt.GraduateId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Cascade);*/
 
 
             // modelBuilder.ApplyConfiguration(new RoleConfiguration());
@@ -116,11 +116,21 @@ namespace HighSchool.Repository
         public DbSet<Widget> Widgets { get; set; }
         public DbSet<AllocatedResource> AllocatedResources { get; set; }
         public DbSet<EmployeeType> EmployeeTypes { get; set; }
+        public DbSet<FeeCategory> FeeCategories { get; set; }
+        public DbSet<FeeCategoryAmount> FeeCategoryAmounts { get; set; }
+        public DbSet<SchoolYear> SchoolYears { get; set; }
+        public DbSet<SchoolTerm> SchoolTerms { get; set; }
+        public DbSet<StudentRegistration> StudentRegistrations { get; set; }
+        public DbSet<Graduate> Graduates { get; set; }
+        public DbSet<StudentClass> StudentClasses { get; set; }
+        public DbSet<StudentLevel> StudentLevels { get; set; }
+
 
         public DbSet<PostCat> PostCats { get; set; }
         public DbSet<StaffCourse> StffCourses { get; set; }
-        public DbSet<StudentGrade> StudentGrades { get; set; }
-        public DbSet<StudentGraduate> StudentGraduates { get; set; }
+
+       // public DbSet<StudentGrade> StudentGrades { get; set; }
+       // public DbSet<StudentGraduate> StudentGraduates { get; set; }
 
 
     }

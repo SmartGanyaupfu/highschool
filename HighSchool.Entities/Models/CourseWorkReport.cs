@@ -14,8 +14,8 @@ namespace HighSchool.Entities.Models
         public Student? Student { get; set; }
         public Guid StudentId { get; set; }
 
-        public Grade? Class { get; set; }
-        public int GradeId { get; set; }
+        public int StudentClassId { get; set; }
+        public StudentClass? Class { get; set; }
 
         public Course? Course  { get; set; }
         public Guid CourseId { get; set; }

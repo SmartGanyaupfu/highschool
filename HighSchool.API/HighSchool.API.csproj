@@ -30,6 +30,8 @@
     <Folder Include="DbContextFactory\" />
     <Folder Include="Controllers\API\" />
     <Folder Include="ActionFilters\" />
+    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\Resources\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HighSchool.LoggerService\HighSchool.LoggerService.csproj">
@@ -47,5 +49,9 @@
     <ProjectReference Include="..\HighSchool.Service\HighSchool.Service.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\" />
+    <Content Remove="wwwroot\Resources\" />
   </ItemGroup>
 </Project>

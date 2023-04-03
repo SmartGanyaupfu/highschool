@@ -22,7 +22,7 @@ namespace HighSchool.Repository
             Delete(studentGraduate);
         }
 
-        public async Task<IEnumerable<StudentGraduate>> GetAllStudentGraduatesByGradeIdAsync(Guid graduateId, bool trackChanges)
+       /* public async Task<IEnumerable<StudentGraduate>> GetAllStudentGraduatesByGradeIdAsync(Guid graduateId, bool trackChanges)
         {
             return await FindByCondition(sg => sg.GraduateId.Equals(graduateId), trackChanges).ToListAsync();
         }
@@ -35,7 +35,7 @@ namespace HighSchool.Repository
         public async Task<StudentGraduate> GetStudentGraduateByIdAsync(int studentGraduateId, bool trackChanges)
         {
             return await FindByCondition(sd => sd.StudentGraduateId.Equals(studentGraduateId), trackChanges).SingleOrDefaultAsync();
-        }
+        }*/
 
         public void UpdateAsync(StudentGraduate studentGraduate)
         {

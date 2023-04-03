@@ -22,15 +22,15 @@ namespace HighSchool.Repository
             Delete(studentGrade);
         }
 
-        public async Task<IEnumerable<StudentGrade>> GetAllStudentGradesByGradeIdAsync(Guid gradeId, bool trackChanges)
+       /* public async Task<IEnumerable<StudentGrade>> GetAllStudentGradesByGradeIdAsync(Guid gradeId, bool trackChanges)
         {
-            return await FindByCondition(sd => sd.GradeId.Equals(gradeId), trackChanges).ToListAsync();
+          //  return await FindByCondition(sd => sd.GradeId.Equals(gradeId), trackChanges).ToListAsync();
         }
 
         public async Task<IEnumerable<StudentGrade>> GetAllStudentGradesByStudentIdAsync(Guid studentId, bool trackChanges)
         {
             return await FindByCondition(sd => sd.StudentId.Equals(studentId), trackChanges).ToListAsync();
-        }
+        }*/
 
         public async Task<StudentGrade> GetStudentGradeByIdAsync(int studentGradeId, bool trackChanges)
         {

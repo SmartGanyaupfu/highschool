@@ -23,49 +23,34 @@ namespace HighSchool.Repository
             Create(student);
         }
 
-        public async Task<PagedList<StudentMV>> GetAllStudentsAsync(RequestParameters requestParameters, bool trackChanges)
+        public async Task<PagedList<Student>> GetAllStudentsAsync(RequestParameters requestParameters, bool trackChanges)
         {
            // var students = await FindByCondition(s => s.Deleted.Equals(false), trackChanges).OrderByDescending(p => p.DateCreated).ToListAsync();
 
             var students = await FindAll(trackChanges)
-            .OrderByDescending(s => s.DateCreated).Select(s => new StudentMV()
-            {
-                Student = s,
-                Grades = s.StudentGrades.Select(g => g.Grade).ToList(),
-                Graduations=s.StudentGraduates.Select(g=>g.Graduate).ToList()
-            }).ToListAsync();
+            .OrderByDescending(s => s.DateCreated).ToListAsync();
 
-            return PagedList<StudentMV>.ToPagedList(students, requestParameters.PageNumber, requestParameters.PageSize);
+            return PagedList<Student>.ToPagedList(students, requestParameters.PageNumber, requestParameters.PageSize);
         }
 
-        public async Task<StudentMV> GetStudentByIdAsync(Guid studentId, bool trackChanges)
+        public async Task<Student> GetStudentByIdAsync(Guid studentId, bool trackChanges)
         {
             return await FindByCondition(p => p.StudentId.Equals(studentId) && p.Deleted == false, trackChanges).Include(n=>n.NextOfKin).Include(n=>n.Notes)
 
-            .OrderByDescending(s => s.DateCreated).Select(s => new StudentMV()
-            {
-                Student = s,
-                Grades = s.StudentGrades.Select(g => g.Grade).ToList(),
-                Graduations = s.StudentGraduates.Select(g => g.Graduate).ToList()
-            })
+            .OrderByDescending(s => s.DateCreated)
             .SingleOrDefaultAsync();
         }
 
-        public async Task<StudentMV> GetStudentBySlugAsync(string slug, bool trackChanges)
+        public async Task<Student> GetStudentBySlugAsync(string slug, bool trackChanges)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<StudentMV> GetStudentNationalIdAsync(string nationalId, bool trackChanges)
+        public async Task<Student> GetStudentNationalIdAsync(string nationalId, bool trackChanges)
         {
             return await FindByCondition(p => p.NationalIdentityNumber.Equals(nationalId) && p.Deleted == false, trackChanges)
 
-            .OrderByDescending(s => s.DateCreated).Select(s => new StudentMV()
-            {
-                Student = s,
-                Grades = s.StudentGrades.Select(g => g.Grade).ToList(),
-                Graduations = s.StudentGraduates.Select(g => g.Graduate).ToList()
-            }).SingleOrDefaultAsync();
+            .OrderByDescending(s => s.DateCreated).SingleOrDefaultAsync();
         }
 
         public void MoveToTrash(Student student)

@@ -20,27 +20,18 @@ namespace HighSchool.Repository
             Create(graduate);
         }
 
-        public async Task<GraduateMV> GetGraduateByIdAsync(int graduateId, bool trackChanges)
+        public async Task<Graduate> GetGraduateByIdAsync(int graduateId, bool trackChanges)
         {
             return await FindByCondition(c => c.GraduateId.Equals(graduateId), trackChanges)
-               .Select(g => new GraduateMV()
-               {
-                   Graduate = g,
-                   Students = g.StudentGraduates.Select(g => g.Student).ToList()
-               })
                .SingleOrDefaultAsync();
         }
 
-        public async Task<PagedList<GraduateMV>> GetGraduatesAsync(RequestParameters requestParameters, bool trackChanges)
+        public async Task<PagedList<Graduate>> GetGraduatesAsync(RequestParameters requestParameters, bool trackChanges)
         {
             var graduates = await FindAll(trackChanges)
-                 .Select(g => new GraduateMV()
-                 {
-                     Graduate = g,
-                     Students = g.StudentGraduates.Select(g => g.Student).ToList()
-                 }).ToListAsync();
+                .ToListAsync();
 
-            return PagedList<GraduateMV>.ToPagedList(graduates, requestParameters.PageNumber, requestParameters.PageNumber);
+            return PagedList<Graduate>.ToPagedList(graduates, requestParameters.PageNumber, requestParameters.PageNumber);
         }
 
         public void MoveToTrash(Graduate graduate)
