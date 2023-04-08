@@ -29,9 +29,17 @@ namespace HighSchool.Repository
         private readonly Lazy<ICourseWorkReportRepository> _courseWorkReportRepository;
         private readonly Lazy<IGradeRepository> _gradeRepository;
         private readonly Lazy<IStaffCourseRepository> _staffCourseRepository;
-        private readonly Lazy<IStudentGradeRepository> _studentGradeRepository;
+       // private readonly Lazy<IStudentGradeRepository> _studentGradeRepository;
         private readonly Lazy<IStudentGraduateRepository> studentGraduateRepository;
         private readonly Lazy<IGraduateRepository> _graduateRepository;
+        private readonly Lazy<IFeeCategoryAmountRepository> feeCategoryAmountRepository;
+        private readonly Lazy<IFeeCategoryRepository> feeCategoryRepository;
+        private readonly Lazy<IStudentClassRepository> studentClassRepository;
+        private readonly Lazy<ISchoolTermRepository> schoolTermRepository;
+        private readonly Lazy<ISchoolYearRepository> schoolYearRepository;
+        private readonly Lazy<IStudentRegistrationRepository> studentRegistrationRepository;
+        private readonly Lazy<IStudentLevelRepository> studentLevelRepository;
+        private readonly Lazy<IStudentSessionRepository> studentSessionRepository;
 
        // private readonly Lazy<ICategoryRepository> _categoryRepository;
         private readonly Lazy<IImageRepository> _imageRepository;
@@ -59,11 +67,20 @@ namespace HighSchool.Repository
             _invoiceRepository = new Lazy<IInvoiceRepository>(() => new InvoiceRepository(repositoryContext));
             _paymentRepository = new Lazy<IPaymentRepository>(() => new PaymentRepository(repositoryContext));
             _courseWorkReportRepository = new Lazy<ICourseWorkReportRepository>(() => new CourseWorkReportRepository(repositoryContext));
-            _gradeRepository = new Lazy<IGradeRepository>(() => new GradeRepository(repositoryContext));
+           // _gradeRepository = new Lazy<IGradeRepository>(() => new GradeRepository(repositoryContext));
             _staffCourseRepository = new Lazy<IStaffCourseRepository>(() => new StaffCourseRepository(repositoryContext));
-            _studentGradeRepository = new Lazy<IStudentGradeRepository>(() => new StudentGradeRepository(repositoryContext));
+          //  _studentGradeRepository = new Lazy<IStudentGradeRepository>(() => new StudentGradeRepository(repositoryContext));
             this.studentGraduateRepository = new Lazy<IStudentGraduateRepository>(() => new StudentGraduateRepository(repositoryContext));
             _graduateRepository = new Lazy<IGraduateRepository>(() => new GraduateRepository(repositoryContext));
+            this.studentLevelRepository = new Lazy<IStudentLevelRepository>(() => new StudentLevelRepository(repositoryContext));
+            this.studentRegistrationRepository = new Lazy<IStudentRegistrationRepository>(() => new StudentRegistrationRepository(repositoryContext));
+            this.schoolTermRepository = new Lazy<ISchoolTermRepository>(() => new SchoolTermRepository(repositoryContext));
+            this.schoolYearRepository = new Lazy<ISchoolYearRepository>(() => new SchoolYearRepository(repositoryContext));
+            this.studentClassRepository = new Lazy<IStudentClassRepository>(() => new StudentClassRepository(repositoryContext));
+            this.feeCategoryAmountRepository = new Lazy<IFeeCategoryAmountRepository>(() => new FeeCategoryAmountRepository(repositoryContext));
+            this.feeCategoryRepository = new Lazy<IFeeCategoryRepository>(() => new FeeCategoryRepository(repositoryContext));
+            this.studentSessionRepository = new Lazy<IStudentSessionRepository>(() => new StudentSessionRepository(repositoryContext));
+
 
         }
 
@@ -111,11 +128,27 @@ namespace HighSchool.Repository
 
         public IStaffCourseRepository StaffCourse => _staffCourseRepository.Value;
 
-        public IStudentGradeRepository StudentGrade => _studentGradeRepository.Value;
+       // public IStudentGradeRepository StudentGrade => _studentGradeRepository.Value;
 
         public IStudentGraduateRepository StudentGraduate => this.studentGraduateRepository.Value;
 
         public IGraduateRepository Graduate => _graduateRepository.Value;
+
+        public IFeeCategoryRepository FeeCategory => this.feeCategoryRepository.Value;
+
+        public IFeeCategoryAmountRepository FeeCategoryAmount => this.feeCategoryAmountRepository.Value;
+
+        public IStudentClassRepository StudentClass => this.studentClassRepository.Value;
+
+        public IStudentLevelRepository StudentLevel => this.studentLevelRepository.Value;
+
+        public IStudentRegistrationRepository StudentRegistration => this.studentRegistrationRepository.Value;
+
+        public IStudentSessionRepository StudentSession => this.studentSessionRepository.Value;
+
+        public ISchoolTermRepository SchoolTerm => this.schoolTermRepository.Value;
+
+        public ISchoolYearRepository SchoolYear => this.schoolYearRepository.Value;
 
         public async Task SaveAsync()
         {

@@ -24,6 +24,7 @@
     <None Remove="DbContextFactory\" />
     <None Remove="Controllers\API\" />
     <None Remove="ActionFilters\" />
+    <None Remove="Controllers\API\settings\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
@@ -32,6 +33,7 @@
     <Folder Include="ActionFilters\" />
     <Folder Include="wwwroot\" />
     <Folder Include="wwwroot\Resources\" />
+    <Folder Include="Controllers\API\settings\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HighSchool.LoggerService\HighSchool.LoggerService.csproj">

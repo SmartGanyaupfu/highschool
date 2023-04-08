@@ -89,6 +89,10 @@ namespace HighSchool.API
             CreateMap<ContentBlockForCreationDto, ContentBlock>();
             CreateMap<ContentBlockForUpdateDto, ContentBlock>();
 
+            CreateMap<FeeCategory, FeeCategoryDto>();
+            CreateMap<FeeCategoryForCreationDto, FeeCategory>();
+            CreateMap<FeeCategoryForUpdateDto, FeeCategory>();
+
             CreateMap<Image, ImageDto>();
             CreateMap<ImageForUpdateDto, Image>();
         }

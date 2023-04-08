@@ -5,7 +5,8 @@ namespace HighSchool.Entities.Models
     public class Student:Person
     {
         public Guid StudentId { get; set; }
-       
+        public string? StudentRegNumber { get; set; }
+
         public ICollection<AllocatedResource>? AllocatedResources { get; set; }
         public ICollection<Note>? Notes { get; set; }
         public ICollection<Invoice> ? Invoices { get; set; }

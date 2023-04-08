@@ -25,11 +25,20 @@ namespace HighSchool.Contracts
         IInvoiceRepository Invoice { get; }
         IPaymentRepository Payment { get; }
         ICourseWorkReportRepository CourseWorkReport { get; }
-        IGradeRepository Grade { get; }
+        //IGradeRepository Grade { get; }
         IStaffCourseRepository StaffCourse { get; }
-        IStudentGradeRepository StudentGrade { get; }
+       // IStudentGradeRepository StudentGrade { get; }
         IStudentGraduateRepository StudentGraduate { get; }
         IGraduateRepository Graduate { get; }
+        IFeeCategoryRepository  FeeCategory { get; }
+        IFeeCategoryAmountRepository FeeCategoryAmount { get; }
+        IStudentClassRepository StudentClass { get; }
+        IStudentLevelRepository StudentLevel { get; }
+        IStudentRegistrationRepository StudentRegistration { get; }
+        IStudentSessionRepository StudentSession { get; }
+        ISchoolTermRepository   SchoolTerm { get; }
+        ISchoolYearRepository SchoolYear { get; }
+
         
     }
 }

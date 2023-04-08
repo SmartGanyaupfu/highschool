@@ -7,7 +7,9 @@ namespace HighSchool.Entities.Models
         public int SchoolYearId { get; set; }
         public SchoolYear? SchoolYear { get; set; }
         public int StudentClassId { get; set; }
-        public StudentClass? Class { get; set; }
+        public StudentClass? StudentClass { get; set; }
+        public int  StudentLevelId { get; set; }
+        public StudentLevel? StudentLevel { get; set; }
 
         public int StudentSessionId { get; set; } //Morning Or Afternoon/ parallel
         public StudentSession? StudentSession { get; set; }
@@ -15,6 +17,7 @@ namespace HighSchool.Entities.Models
         public SchoolTerm? SchoolTerm { get; set; }
         public Guid StudentId { get; set; }
         public Student? Student { get; set; }
+
 
     }
 }
