@@ -8,7 +8,7 @@ namespace HighSchool.Contracts
     {
 
         Task<IEnumerable<StudentSession>> GetAllStudentSessionsAsync( bool trackChanges);
-        Task<IEnumerable<StudentSession>> GetAllDrafStudentSessionsAsync(bool trackChanges);
+        Task<IEnumerable<StudentSession>> GetAllDraftStudentSessionsAsync(bool trackChanges);
         Task<IEnumerable<StudentSession>> GetAllPublishedStudentSessionsAsync(bool trackChanges);
         Task<StudentSession> GetStudentSessionByIdAsync(int studentSessionId, bool trackChanges);
         void CreateStudentSessionAsync(StudentSession studentSession);

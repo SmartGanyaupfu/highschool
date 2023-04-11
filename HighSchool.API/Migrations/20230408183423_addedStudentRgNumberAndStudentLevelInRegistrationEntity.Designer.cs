@@ -3,6 +3,7 @@ using System;
 using HighSchool.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HighSchool.API.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20230408183423_addedStudentRgNumberAndStudentLevelInRegistrationEntity")]
+    partial class addedStudentRgNumberAndStudentLevelInRegistrationEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.11");
@@ -144,8 +146,8 @@ namespace HighSchool.API.Migrations
                         new
                         {
                             CategoryId = 1,
-                            DateCreated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9500),
-                            DateUpdated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9500),
+                            DateCreated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(700),
+                            DateUpdated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(710),
                             Deleted = false,
                             Name = "Mobile",
                             Published = false,
@@ -154,8 +156,8 @@ namespace HighSchool.API.Migrations
                         new
                         {
                             CategoryId = 2,
-                            DateCreated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9510),
-                            DateUpdated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9510),
+                            DateCreated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(710),
+                            DateUpdated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(710),
                             Deleted = false,
                             Name = "Web",
                             Published = false,
@@ -522,8 +524,8 @@ namespace HighSchool.API.Migrations
                         {
                             ImageId = 1,
                             AltText = "Test",
-                            DateCreated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9440),
-                            DateUpdated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9440),
+                            DateCreated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(640),
+                            DateUpdated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(650),
                             Deleted = false,
                             ImageUrl = "https://learn.microsoft.com/en-us/shows/azure-sql-for-beginners/media/azuresqlforbeginners-2020-511x287.png",
                             Name = "My-seed-Image",
@@ -533,8 +535,8 @@ namespace HighSchool.API.Migrations
                         {
                             ImageId = 2,
                             AltText = "Test 2",
-                            DateCreated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9450),
-                            DateUpdated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9450),
+                            DateCreated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(650),
+                            DateUpdated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(650),
                             Deleted = false,
                             ImageUrl = "https://learn.microsoft.com/en-us/shows/azure-sql-for-beginners/media/azuresqlforbeginners-2020-511x287.png",
                             Name = "My-seed-Image 2nd",
@@ -864,10 +866,10 @@ namespace HighSchool.API.Migrations
                     b.HasData(
                         new
                         {
-                            PageId = new Guid("24865995-5a20-4f57-b62c-9d51f77ae3d9"),
+                            PageId = new Guid("8c8c881e-1bc4-4aea-8182-7190805327a2"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(8750),
-                            DateUpdated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(8780),
+                            DateCreated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(290),
+                            DateUpdated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(310),
                             Deleted = false,
                             FeatureImageId = 1,
                             MetaDescription = "The inner was the inner",
@@ -878,10 +880,10 @@ namespace HighSchool.API.Migrations
                         },
                         new
                         {
-                            PageId = new Guid("a53dc23e-0749-42c3-943c-4528424b0d79"),
+                            PageId = new Guid("3df2df97-a5a4-4619-9421-bed317bb8bee"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(8830),
-                            DateUpdated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(8830),
+                            DateCreated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(370),
+                            DateUpdated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(370),
                             Deleted = false,
                             FeatureImageId = 1,
                             MetaDescription = "The inner was the inner",
@@ -892,10 +894,10 @@ namespace HighSchool.API.Migrations
                         },
                         new
                         {
-                            PageId = new Guid("ec6f7846-a498-4e6a-8a38-47f5d765c380"),
+                            PageId = new Guid("ac8cfdf0-3e5b-4eea-8748-053459169fdb"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(8840),
-                            DateUpdated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(8840),
+                            DateCreated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(370),
+                            DateUpdated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(370),
                             Deleted = false,
                             MetaDescription = "The inner was the inner",
                             MetaKeyWords = "test,tets,done",
@@ -1038,10 +1040,10 @@ namespace HighSchool.API.Migrations
                     b.HasData(
                         new
                         {
-                            PostId = new Guid("f0deb004-7af3-4e0f-bd4c-5fd234406883"),
+                            PostId = new Guid("c02c84df-8979-4b32-8dc3-11d841d4bf83"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9360),
-                            DateUpdated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9360),
+                            DateCreated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(550),
+                            DateUpdated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(550),
                             Deleted = false,
                             FeatureImageId = 1,
                             MetaDescription = "The inner was the inner",
@@ -1052,10 +1054,10 @@ namespace HighSchool.API.Migrations
                         },
                         new
                         {
-                            PostId = new Guid("d1106847-5b04-4c66-8898-eea7c87e035f"),
+                            PostId = new Guid("03ae1204-d761-48e4-9d40-aeb37f66e4ed"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9370),
-                            DateUpdated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9370),
+                            DateCreated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(560),
+                            DateUpdated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(560),
                             Deleted = false,
                             FeatureImageId = 1,
                             MetaDescription = "The inner was the inner",
@@ -1066,10 +1068,10 @@ namespace HighSchool.API.Migrations
                         },
                         new
                         {
-                            PostId = new Guid("6fb3291f-c164-48a0-9755-689425d2714b"),
+                            PostId = new Guid("f21bc001-f172-4fdf-9323-be11e18caeb4"),
                             Content = "The innner part of the solar cookker is made of mirroes",
-                            DateCreated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9380),
-                            DateUpdated = new DateTime(2023, 4, 9, 14, 52, 49, 378, DateTimeKind.Local).AddTicks(9380),
+                            DateCreated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(570),
+                            DateUpdated = new DateTime(2023, 4, 8, 20, 34, 22, 528, DateTimeKind.Local).AddTicks(570),
                             Deleted = false,
                             MetaDescription = "The inner was the inner",
                             MetaKeyWords = "test,tets,done",
@@ -1194,13 +1196,10 @@ namespace HighSchool.API.Migrations
                     b.Property<bool?>("Published")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Year")
-                        .HasColumnType("INTEGER");
+                    b.Property<DateTime?>("Year")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("SchoolYearId");
-
-                    b.HasIndex("Year")
-                        .IsUnique();
 
                     b.ToTable("SchoolYears");
                 });

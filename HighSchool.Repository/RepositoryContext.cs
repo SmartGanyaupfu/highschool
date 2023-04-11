@@ -56,6 +56,8 @@ namespace HighSchool.Repository
                 .HasForeignKey(pt => pt.CourseId)
             .OnDelete(DeleteBehavior.Cascade);
 
+       
+
             /*modelBuilder.Entity<StudentGrade>()
       .HasKey(t => new { t.StudentId, t.GradeId });
 

@@ -21,6 +21,7 @@ namespace HighSchool.Repository
             schoolTerm.Deleted = false;
             schoolTerm.DateCreated = DateTime.Now;
             schoolTerm.DateUpdated = DateTime.Now;
+            Create(schoolTerm);
         }
 
         public async Task<IEnumerable<SchoolTerm>> GetAllDraftSchoolTermsAsync(bool trackChanges)
@@ -49,6 +50,7 @@ namespace HighSchool.Repository
         {
             schoolTerm.Deleted = true;
             schoolTerm.DateUpdated = DateTime.Now;
+            Update(schoolTerm);
         }
 
         public void PermanentDelete(SchoolTerm schoolTerm)

@@ -21,7 +21,7 @@ namespace HighSchool.Repository
             Create(studentSession);
         }
 
-        public async Task<IEnumerable<StudentSession>> GetAllDrafStudentSessionsAsync(bool trackChanges)
+        public async Task<IEnumerable<StudentSession>> GetAllDraftStudentSessionsAsync(bool trackChanges)
         {
            return await FindByCondition(l => l.Published.Equals(false), trackChanges).ToListAsync();
         }

@@ -11,7 +11,7 @@ namespace HighSchool.Contracts
         Task<IEnumerable<FeeCategoryAmount>> GetAllDraftFeeCategoryAmountsAsync(int studentLevelId,bool trackChanges);
         Task<IEnumerable<FeeCategoryAmount>> GetAllPublishFeeCategoryAmountsAsync(int studentLevelId, bool trackChanges);
         Task<FeeCategoryAmount> GetFeeCategoryAmountByIdAsync(int feeCategoryAmountId, bool trackChanges);
-        void CreateFeeCategoryAmountAsync(int studentLevelId, int feeCategoryId,FeeCategoryAmount feeCategoryAmount);
+        void CreateFeeCategoryAmountAsync(FeeCategoryAmount feeCategoryAmount);
         void MoveToTrash(FeeCategoryAmount feeCategoryAmount);
         void SetToDraft(FeeCategoryAmount feeCategoryAmount);
         void Publish(FeeCategoryAmount feeCategoryAmount);

@@ -7,7 +7,7 @@ namespace HighSchool.Entities.Models
         public double? Amount { get; set; }
         public int StudentLevelId { get; set; }
         public StudentLevel? StudentLevel { get; set; }
-        public int? FeeCategoryId { get; set; }
+        public int FeeCategoryId { get; set; }
         public FeeCategory? FeeCategory { get; set; }
     }
 }

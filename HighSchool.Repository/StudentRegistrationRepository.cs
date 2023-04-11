@@ -13,18 +13,13 @@ namespace HighSchool.Repository
         {
         }
 
-        public void CreateStudentRegistrationAsync(int schoolYearId, Guid studentId, int studentLevelId, int studentClassId, int studentSessionId, int schoolTermId, StudentRegistration studentRegistration)
+        public void CreateStudentRegistrationAsync( StudentRegistration studentRegistration)
         {
             studentRegistration.Published = false;
             studentRegistration.DateCreated = DateTime.Now;
             studentRegistration.Deleted = false;
             studentRegistration.DateUpdated = DateTime.Now;
-            studentRegistration.SchoolYearId = schoolYearId;
-            studentRegistration.StudentId = studentId;
-           studentRegistration.StudentLevelId = studentLevelId;
-            studentRegistration.StudentClassId = studentClassId;
-            studentRegistration.StudentSessionId = studentSessionId;
-            studentRegistration.SchoolTermId = schoolTermId;
+           
             Create(studentRegistration);
         }
 
@@ -58,12 +53,14 @@ namespace HighSchool.Repository
 
         public async Task<StudentRegistration> GetStudentRegistrationByIdAsync(int studentRegistrationId, bool trackChanges)
         {
-            return await FindByCondition(l => l.StudentRegistrationId.Equals(studentRegistrationId), trackChanges).FirstOrDefaultAsync();
+            return await FindByCondition(l => l.StudentRegistrationId.Equals(studentRegistrationId), trackChanges).
+               Include(s => s.SchoolYear).Include(s => s.Student).Include(c => c.StudentClass).Include(t=>t.SchoolTerm).FirstOrDefaultAsync();
         }
 
-        public async Task<StudentRegistration> GetStudentRegistrationByStudentIdAsync(int schoolYearId, Guid studentId, bool trackChanges)
+        public async Task<IEnumerable< StudentRegistration>> GetStudentRegistrationByStudentIdAsync(int schoolYearId, Guid studentId, bool trackChanges)
         {
-            return await FindByCondition(l => l.StudentId.Equals(studentId) && l.SchoolYearId.Equals(schoolYearId), trackChanges).FirstOrDefaultAsync();
+           return await FindByCondition(l => l.StudentId.Equals(studentId) && l.SchoolYearId.Equals(schoolYearId), trackChanges).
+               Include(s => s.SchoolYear).Include(s => s.Student).Include(c => c.StudentClass).Include(t => t.SchoolTerm).ToListAsync();
         }
 
         public void MoveToTrash(StudentRegistration studentRegistration)

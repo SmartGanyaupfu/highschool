@@ -93,6 +93,34 @@ namespace HighSchool.API
             CreateMap<FeeCategoryForCreationDto, FeeCategory>();
             CreateMap<FeeCategoryForUpdateDto, FeeCategory>();
 
+            CreateMap<FeeCategoryAmount, FeeCategoryAmountDto>();
+            CreateMap<FeeCategoryAmountForCreationDto, FeeCategoryAmount>();
+            CreateMap<FeeCategoryAmountForUpdateDto, FeeCategoryAmount>();
+
+            CreateMap<SchoolTerm, SchoolTermDto>();
+            CreateMap<SchoolTermForCreationDto, SchoolTerm>();
+            CreateMap<SchoolTermForUpdateDto, SchoolTerm>();
+
+            CreateMap<SchoolYear, SchoolYearDto>();
+            CreateMap<SchoolYearForCreationDto, SchoolYear>();
+            CreateMap<SchoolYearForUpdateDto, SchoolYear>();
+
+            CreateMap<StudentLevel, StudentLevelDto>();
+            CreateMap<StudentLevelForCreationDto, StudentLevel>();
+            CreateMap<StudentLevelForUpdateDto, StudentLevel>();
+
+            CreateMap<StudentClass, StudentClassDto>();
+            CreateMap<StudentClassForCreationDto, StudentClass>();
+            CreateMap<StudentClassForUpdateDto, StudentClass>();
+
+            CreateMap<StudentSession, StudentSessionDto>();
+            CreateMap<StudentSessionForCreationDto, StudentSession>();
+            CreateMap<StudentSessionForUpdateDto, StudentSession>();
+
+            CreateMap<StudentRegistration, StudentRegistrationDto>();
+            CreateMap<StudentRegistrationForCreationDto, StudentRegistration>();
+            CreateMap<StudentRegistrationForUpdateDto, StudentRegistration>();
+
             CreateMap<Image, ImageDto>();
             CreateMap<ImageForUpdateDto, Image>();
         }

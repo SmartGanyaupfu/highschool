@@ -12,14 +12,12 @@ namespace HighSchool.Repository
         {
         }
 
-        public void CreateFeeCategoryAmountAsync(int studentLevelId, int feeCategoryId, FeeCategoryAmount feeCategoryAmount)
+        public void CreateFeeCategoryAmountAsync( FeeCategoryAmount feeCategoryAmount)
         {
             feeCategoryAmount.Published = false;
             feeCategoryAmount.DateCreated = DateTime.Now;
             feeCategoryAmount.Deleted = false;
             feeCategoryAmount.DateUpdated = DateTime.Now;
-            feeCategoryAmount.StudentLevelId = studentLevelId;
-            feeCategoryAmount.FeeCategoryId = feeCategoryId;
             Create(feeCategoryAmount);
         }
 

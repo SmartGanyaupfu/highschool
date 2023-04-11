@@ -19,28 +19,30 @@ namespace HighSchool.Repository
             studentClass.Deleted = false;
             studentClass.DateCreated = DateTime.Now;
             studentClass.DateUpdated = DateTime.Now;
+            studentClass.StudentLevelId = levelId;
+            Create(studentClass);
         }
 
         public async Task<IEnumerable<StudentClass>> GetAllDraftStudentClassesAsync(bool trackChanges)
         {
-            return await FindByCondition(s=>s.Published.Equals(false), trackChanges).ToListAsync();
+            return await FindByCondition(s=>s.Published.Equals(false), trackChanges).Include(l => l.StudentLevel).ToListAsync();
         }
 
         public async Task<IEnumerable<StudentClass>> GetAllPublishedStudentClassesAsync(bool trackChanges)
         {
-            return await FindByCondition(l => l.Published.Equals(true) && l.Deleted.Equals(false), trackChanges).ToListAsync();
+            return await FindByCondition(l => l.Published.Equals(true) && l.Deleted.Equals(false), trackChanges).Include(l => l.StudentLevel).ToListAsync();
         }
 
         public async Task<IEnumerable<StudentClass>> GetAllStudentClassesAsync( bool trackChanges)
         {
-            return await FindAll(trackChanges).ToListAsync();
+            return await FindAll(trackChanges).Include(l => l.StudentLevel).ToListAsync();
         }
 
         
 
         public async Task<StudentClass> GetStudentClassByIdAsync(int studentClassId, bool trackChanges)
         {
-            return await FindByCondition(l => l.StudentClassId.Equals(studentClassId), trackChanges).SingleOrDefaultAsync();
+            return await FindByCondition(l => l.StudentClassId.Equals(studentClassId), trackChanges).Include(l=>l.StudentLevel).SingleOrDefaultAsync();
         }
 
         public void MoveToTrash(StudentClass studentClass)
