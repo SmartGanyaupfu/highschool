@@ -89,7 +89,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    FullCalendarModule, // import the FullCalendar module! will make the FullCalendar component available
+   FullCalendarModule, // import the FullCalendar module! will make the FullCalendar component available
     PerfectScrollbarModule,
     NgbDropdownModule,
     NgbTooltipModule,

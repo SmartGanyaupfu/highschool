@@ -20,7 +20,7 @@ export const MENU: MenuItem[] = [
     subItems: [
       {
         label: 'All ',
-        link: '/apps/email/inbox',
+        link: '/school-setup',
       },
       {
         label: 'Add New ',

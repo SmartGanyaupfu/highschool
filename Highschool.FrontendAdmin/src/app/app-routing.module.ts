@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BaseComponent } from './views/layout/base/base.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { ErrorPageComponent } from './views/pages/error-page/error-page.component';
+import { AcademicYearsListComponent } from './views/pages/admin/school-setup/academic-years-list/academic-years-list.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'apps',
         loadChildren: () => import('./views/pages/apps/apps.module').then(m => m.AppsModule)
+      },
+      {
+        path: 'school-setup',
+        component:AcademicYearsListComponent
       },
       {
         path: 'ui-components',

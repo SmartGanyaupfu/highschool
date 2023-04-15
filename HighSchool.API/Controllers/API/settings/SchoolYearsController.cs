@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HighSchool.API.Controllers.API.settings
 {
-    [Route("api/schoo-years")]
+    [Route("api/school-years")]
     public class SchoolYearsController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
