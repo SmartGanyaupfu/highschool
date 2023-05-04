@@ -98,16 +98,32 @@ namespace HighSchool.API.Controllers.API
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateStudent([FromBody] StudentForCreationDto student)
         {
-            var studentsFromDb = await _repository.Student.GetStudentNationalIdAsync(student.NationalIdentityNumber, trackChanges: false);
+            DateTime dob = (DateTime)student.DateOfBirth;
+            var date = DateTime.Now;
+            string year = (date.Year%100).ToString();
+            string month = dob.Month.ToString().PadLeft(2, '0');
+            string suffix= student?.LastName[0].ToString().ToUpper();
+            string second = date.Second.ToString().PadLeft(2, '0');
+            string prefix = student?.FirstName[0].ToString().ToUpper();
+            string regNumber = prefix+year + month +second + suffix;
+            
+            var studentsFromDb = await _repository.Student.GetStudentRegistrationNumberAsync(regNumber, trackChanges: false);
 
             if (studentsFromDb != null)
             {
-                return BadRequest($"Student with id {student.NationalIdentityNumber} already exists.");
+                date = DateTime.Now;
+                second = date.Second.ToString().PadLeft(2, '0');
+                regNumber = prefix + year + month + second + suffix;
+
+               // return BadRequest($"Student with id {regNumber} already exists. Try again later");
             }
 
+            
             student.AuthorId = User.GetUserId();
 
             var studentEntity = _mapper.Map<Student>(student);
+            studentEntity.StudentRegNumber = regNumber;
+
             _repository.Student.CreateStudentAsync(studentEntity);
             await _repository.SaveAsync();
             var studentToReturn = _mapper.Map<StudentDto>(studentEntity);
@@ -158,25 +174,8 @@ namespace HighSchool.API.Controllers.API
             // return Ok(studentFromDbToReturn);
             return CreatedAtRoute("studentsId", new { studentId = studentToReturn.StudentId }, studentToReturn);
         }
-        /* [Authorize]
-      [HttpPost("{postId}/add-block")]
-      public async Task<IActionResult> AddBlock([FromBody] ContentBlockForCreationDto contentBlock, Guid postId)
-      {
-          var postEntity = await _repository.Post.GetPostByIdAsync(postId, trackChanges: false);
-          if (postEntity is null)
-              return NotFound($"Post with id {postId} does not exist.");
-
-          var blockEntity = _mapper.Map<ContentBlock>(contentBlock);
-          _repository.ContentBlock.CreateContentBlockAsync(blockEntity);
-
-          await _repository.SaveAsync();
-
-          var postToReturn = _mapper.Map<PostDto>(postEntity);
-
-
-          return CreatedAtRoute("postsId", new { postId = postToReturn.PostId }, postToReturn);
-      }
-        */
+       
+        
         //[Authorize]
         [HttpPut("{studentId}")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
@@ -188,6 +187,9 @@ namespace HighSchool.API.Controllers.API
             {
                 return NotFound($"Student with id {studentId} does not exist");
             }
+
+
+
             student.AuthorId = User.GetUserId();
 
           

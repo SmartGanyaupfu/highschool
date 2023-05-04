@@ -8,8 +8,6 @@ namespace HighSchool.Shared.DTOs
             DateCreated = DateTime.Now;
         }
 
-        public ICollection<int>? GradesIds { get; set; }
-        public ICollection<int>? GraduateIds { get; set; }
     }
 }
 

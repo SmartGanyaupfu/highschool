@@ -16,7 +16,7 @@ namespace HighSchool.API.Extensions
               services.AddCors(options =>
               {
                   options.AddPolicy("CorsPolicy", builder =>
-                   builder.WithOrigins("http://localhost:4000", "http://localhost:4200")
+                   builder.WithOrigins("http://localhost:50837", "http://localhost:4200")
                    .AllowAnyMethod()
                    .AllowAnyHeader().WithExposedHeaders("X-Pagination"));
               });

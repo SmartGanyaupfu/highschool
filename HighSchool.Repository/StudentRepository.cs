@@ -17,8 +17,10 @@ namespace HighSchool.Repository
         }
 
         public void CreateStudentAsync(Student student)
+            
         {
             student.Published = true;
+            
             student.DatePublished = DateTime.Now;
             Create(student);
         }
@@ -46,9 +48,9 @@ namespace HighSchool.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<Student> GetStudentNationalIdAsync(string nationalId, bool trackChanges)
+        public async Task<Student> GetStudentRegistrationNumberAsync(string studentRegNumber, bool trackChanges)
         {
-            return await FindByCondition(p => p.NationalIdentityNumber.Equals(nationalId) && p.Deleted == false, trackChanges)
+            return await FindByCondition(p => p.NationalIdentityNumber.Equals(studentRegNumber) && p.Deleted == false, trackChanges)
 
             .OrderByDescending(s => s.DateCreated).SingleOrDefaultAsync();
         }

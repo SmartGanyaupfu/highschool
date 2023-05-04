@@ -10,7 +10,7 @@ namespace HighSchool.Contracts
         Task<PagedList<Student>> GetAllStudentsAsync(RequestParameters requestParameters, bool trackChanges);
         Task<Student> GetStudentByIdAsync(Guid studentId, bool trackChanges);
         Task<Student> GetStudentBySlugAsync(string slug, bool trackChanges);
-        Task<Student> GetStudentNationalIdAsync(string nationalId, bool trackChanges);
+        Task<Student> GetStudentRegistrationNumberAsync(string nationalId, bool trackChanges);
         void CreateStudentAsync(Student student);
         void MoveToTrash(Student student);
         void SetToDraft(Student student);
